@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const db = require("./datenbank");
+const db = require("./database");
 
 const registerUser = (username, password, callback) =>{
     bcrypt.hash(password, 10, (err, hash) =>{
