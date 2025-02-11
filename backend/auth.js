@@ -7,8 +7,8 @@ const registerUser = (username, password, callback) =>{
             return callback(err);
         }
         db.run(
-            "INSERT INTO users (username, passwprd) VALUES (?, ?)",
-            [username, hash],
+            "INSERT INTO users (username, password, email) VALUES (?, ?, ?)",
+            [username, hash, email],
             function (err) {
                 if (err) {
                     return callback(err);
@@ -19,17 +19,17 @@ const registerUser = (username, password, callback) =>{
     });
 };
 
-const loginUser = (username, password, callback) => {
-    db.get("SELECT * FROM users WHERE username = ?", [username], (err, user) => {
+const loginUser = (username, password, email, callback) => {
+    db.get("SELECT * FROM users WHERE username = ? OR email = ?", [username, email], (err, user) => {
         if (err) {
             return callback(err);
         }
-        if (!user) {
+        if (!username, !email) {
             return callback(null, false);
         }
-        bcrypt.compare(password, user.password, (err, res) => {
+        bcrypt.compare(password, username.password, (err, res) => {
             if (res) {
-                callback(null, user);
+                callback(null, username);
             } else {
                 callback(null, false);
             }
