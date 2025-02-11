@@ -20,7 +20,7 @@ const registerUser = (username, password, callback) =>{
 };
 
 const loginUser = (username, password, email, callback) => {
-    db.get("SELECT * FROM users WHERE username = ? OR email = ?", [username, email], (err, user) => {
+    db.get("SELECT * FROM users WHERE username = ? OR email = ?", [username, email], (err, username) => {
         if (err) {
             return callback(err);
         }

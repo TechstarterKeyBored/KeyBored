@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3").verbose();
 
-const db = new sqlite3.Database("./game.db", (err) => {
+const db = new sqlite3.Database("./profile.db", (err) => {
     if (err) {
         console.error("Fehler beim Öffnen der Datenbank:", err.message);
     } else{
@@ -14,7 +14,8 @@ db.serialize(() =>{
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL
+        email TEXT UNIQUE NOT NULL,
+        profile_picture TEXT DEFAULT NULL
     )`
 );
 
