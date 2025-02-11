@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const profileRoutes = require('./routes/profile');
+const profileRoutes = require('./profile');
 const authMiddleware = require('./middleware/auth');
 
 const app = express();
