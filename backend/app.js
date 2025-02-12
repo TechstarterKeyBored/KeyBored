@@ -12,14 +12,15 @@ app.listen(port, () => {
     console.log(`Server running on port http://localhost:${port}`);
 });
 
-app.get('/lyrics', async (req, res) => {
-    const lyrics = await getLyrics(req.query.track_id);
+app.get('/lyrics/:track_id', async (req, res) => {
+    const track_id = Number(req.params.track_id);
+    const lyrics = await getLyrics(track_id);
     res.json({ lyrics });
 });
 
 
-const getLyrics = async () => {
-    const response = await fetch(`https://api.musixmatch.com/ws/1.1/track.lyrics.get?commontrack_id=70685934&apikey=${API_KEY}`);
+const getLyrics = async (track_id) => {
+    const response = await fetch(`https://api.musixmatch.com/ws/1.1/track.lyrics.get?commontrack_id=${track_id}&apikey=${API_KEY}`);
     const data = await response.json();
     console.log(data);
     return data.message.body.lyrics.lyrics_body;
