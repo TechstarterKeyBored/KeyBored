@@ -42,22 +42,23 @@ const typingGame = () => {
     if (!isPaused && gameStarted && lives > 0) {
       const interval = setInterval(() => {
         const zone = fingerZones[Math.floor(Math.random() * fingerZones.length)];
-        const letter = zone.letter[Math.floor(Math.random() * zone.letters.length)];
+        const letter = zone.letters[Math.floor(Math.random() * zone.letters.length)];
+        console.log('HIER', letter);
         const isUppperCase = Math.random() < 0.5;
         const letterToDisplay = isUppperCase
-        ? letter.toUpperCase()
-        : letter.toLowerCase();
+          ? letter.toUpperCase()
+          : letter.toLowerCase();
 
-        setFallingLetters((prav) => [
-          ...prev,
+        setFallingLetters((prev) => 
+          [...prev,
           {
             letter: letterToDisplay,
             top: 0,
             zoneIndex: zone.position,
             id: Date.now(),
             timer: 7000,
-          },
-        ]);
+          }],
+      );
       }, 2500);
       return () => clearInterval(interval);
     }
@@ -156,7 +157,7 @@ const typingGame = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 flex-col items-center justify-center">
+    <div className="relative w-3xl h-screen flex-col items-center justify-center mx-auto bg-white opacity-75">
       {gameStarted ? (
         countdown > 0 ? (
           <div className="absolute bg-gray-800 text-white p-6 rounded-lg text-center">
@@ -200,12 +201,12 @@ const typingGame = () => {
           </>
         )
         ):(
-          <div className="absolute bg-gray-800 text-white p-6 rounded-lg text-center">
+          <div className="absolute bg-gray-800 text-white p-6 rounded-lg text-center mx-auto mt-10">
             <h2 className="text-2xl mb-4">Typing Trainer</h2>
             <p>Positioniere deine Finger auf der Tastatur!</p>
             <p> Linke Hand: Kleiner Finger - A, Ringfinger - S, Mittelfinger - D, Zeigefinger - F</p>
             <p> Rechte Hand:Kleiner Finger - Ö, Ringfinger - L, Mittelfinger - K, Zeigefinger - J</p>
-            <button onClick={handleRestart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Spiel Starten</button>
+            <button onClick={handleStart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Spiel Starten</button>
           </div>
         )}
         </div>
