@@ -1,19 +1,72 @@
-import { useState, useEffect, useRef } from 'react';
-import { Play, Pause, RotateCcw } from 'lucide-react';
+import { useState, useEffect, useRef } from "react";
+import { Play, Pause, RotateCcw } from "lucide-react";
 
 const KaraokePlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef(null);
-  
+
   // Sample lyrics with timing (in seconds)
   const lyrics = [
-    { time: 0, text: "I can't help" },
-    { time: 2, text: "falling in love" },
-    { time: 4, text: "with you" },
-    { time: 6, text: "Wise men say" },
-    { time: 8, text: "only fools rush in" },
-    // Add more lyrics with timing
+    { time: 18, text: "you only see" },
+    { time: 20, text: "what your eyes want to see" },
+    { time: 22, text: "how can life be " },
+    { time: 24, text: "what you want it to be" },
+    { time: 27, text: "you re frozen" },
+    { time: 29, text: "when your heart s not open" },
+    { time: 37, text: "you re so consumed with how much you get" },
+    { time: 40.5, text: "you waste your time with hate and regret" },
+    { time: 44.5, text: "you re broken" },
+    { time: 47, text: "when your heart s not open" },
+    { time: 53, text: "mmmmmm" },
+    { time: 57.5, text: "if i could melt your heart" },
+    { time: 62.5, text: "mmmmmm" },
+    { time: 66.5, text: "we d never be apart" },
+    { time: 72, text: "mmmmmm" },
+    { time: 75.5, text: "give yourself to me" },
+    { time: 81, text: "mmmmmm" },
+    { time: 84.5, text: "you hold the key" },
+    { time: 98.5, text: "now there s no point in placing the blame" },
+    { time: 103, text: "and you should know i suffer the same" },
+    { time: 106.5, text: "if i lose you" },
+    { time: 108.5, text: "my heart will be broken" },
+    { time: 116.5, text: "love is a bird" },
+    { time: 118.5, text: "she needs to fly" },
+    { time: 120.5, text: "let all the hurt inside of you die" },
+    { time: 124.5, text: "you re frozen" },
+    { time: 126.5, text: "when your heart s not open" },
+    { time: 134, text: "mmmmmm" },
+    { time: 137.5, text: "if i could melt your heart" },
+    { time: 143, text: "mmmmmm" },
+    { time: 146.5, text: "we d never be apart" },
+    { time: 151.5, text: "mmmmmm" },
+    { time: 156, text: "give yourself to me" },
+    { time: 160.5, text: "mmmmmm" },
+    { time: 164.5, text: "you hold" },
+    { time: 170, text: "the key" },
+    { time: 173, text: "*music*" },
+    { time: 213.5, text: "you only see what your eyes want to see" },
+    { time: 218.5, text: "how can life be what you want it to be" },
+    { time: 222.5, text: "you re frozen" },
+    { time: 225, text: "when your heart s not open" },
+    { time: 232, text: "mmmmmm" },
+    { time: 235.5, text: "if i could melt your heart" },
+    { time: 240, text: "mmmmmm" },
+    { time: 245, text: "we d never be apart" },
+    { time: 249.5, text: "mmmmmm" },
+    { time: 253.5, text: "give yourself to me" },
+    { time: 258, text: "mmmmmm" },
+    { time: 262, text: "you hold" },
+    { time: 267, text: "the key" },
+    { time: 271.5, text: "if i could melt your heart" },
+    { time: 276, text: "mmmmmm" },
+    { time: 279.5, text: "we d never be apart" },
+    { time: 284, text: "mmmmmm" },
+    { time: 289, text: "give yourself to me" },
+    { time: 293.5, text: "mmmmmm" },
+    { time: 297, text: "you hold" },
+    { time: 302, text: "the key" },
+    { time: 306, text: "if i could melt your heart" },
   ];
 
   useEffect(() => {
@@ -21,7 +74,7 @@ const KaraokePlayer = () => {
     if (isPlaying) {
       interval = setInterval(() => {
         setCurrentTime((time) => {
-          if (time >= 12) return 0; // Loop back to start
+          // if (time >= 1) return 0; // Loop back to start
           return time + 0.1;
         });
       }, 100);
@@ -34,12 +87,12 @@ const KaraokePlayer = () => {
       if (curr.time <= currentTime) return curr;
       return prev;
     }, lyrics[0]);
-    
+
     return currentLyric;
   };
 
   const getNextLyric = () => {
-    const nextLyric = lyrics.find(lyric => lyric.time > currentTime);
+    const nextLyric = lyrics.find((lyric) => lyric.time > currentTime);
     return nextLyric || lyrics[0];
   };
 
@@ -70,11 +123,11 @@ const KaraokePlayer = () => {
         src="/path-to-your-audio.mp3"
         onEnded={() => setIsPlaying(false)}
       />
-      
+
       {/* Current time display */}
-      <div className="text-gray-400 text-sm mb-4">
-        {Math.floor(currentTime)}:{((currentTime % 1) * 10).toFixed(0).padStart(1, '0')}
-      </div>
+      {/* <div className="text-gray-400 text-sm mb-4"> */}
+      {/* {Math.floor(currentTime)}:{((currentTime % 1) * 10).toFixed(0).padStart(1, '0')} */}
+      {/* </div> */}
 
       {/* Lyrics display */}
       <div className="space-y-6 mb-8">
@@ -103,6 +156,9 @@ const KaraokePlayer = () => {
           <RotateCcw className="w-6 h-6 text-white" />
         </button>
       </div>
+        <div className="flex justify-center my-8">
+          <input type="text" className="bg-gray-600 text-white" ></input>
+        </div>
     </div>
   );
 };

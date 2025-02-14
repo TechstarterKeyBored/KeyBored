@@ -4,12 +4,9 @@ import KaraokePlayer from './components/KaraokePlayer';
 
 function App() {
   return(
-    <div className="App">
-      <header className="bg-gray-800 text-white p-4">
-        <h1>Test</h1>
-        <ReactPlayer url="https://www.youtube.com/watch?v=l-iAS18rv68" />
+    <div className="flex flex-col justify-center items-center">
+        <ReactPlayer url="https://www.youtube.com/watch?v=XS088Opj9o0" volume={1} muted={true} playing={true} />
         <KaraokePlayer />
-      </header>
     </div>
   )
 }
