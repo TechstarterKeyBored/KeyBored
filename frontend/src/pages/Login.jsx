@@ -107,7 +107,7 @@ function Login() {
           Anmelden
         </button>
       </form>
-      {protectedData && <p className="mt-4 text-gray-700">Erhaltene Daten: {JSON.stringify(protectedData)}</p>}
+      {/* {protectedData && <p className="mt-4 text-gray-700">Erhaltene Daten: {JSON.stringify(protectedData)}</p>} */}
     </div>
   );
 }
