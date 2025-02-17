@@ -9,7 +9,7 @@ const fingerZones = [
   { letters: "rfvtgb", color: "red", position: 3, label: "Zeigefinger" },
   { letters: "zhnujm", color: "purple", position: 4, label: "Zeigefinger" },
   { letters: "ik", color: "blue", position: 5, label: "Mittelfinger" },
-  { letters: "ol", color: "green", position: 6, label: "Ringfinger "},
+  { letters: "ol", color: "green", position: 6, label: "Ringfinger"},
   { letters: "pöüä", color: "brown", position: 7, label: "Kleiner Finger" },
 ];
 
@@ -166,6 +166,8 @@ const typingGame = () => {
         ) : lives === 0 ? (
           <div className="absolute bg-red-700 text-white p-6 rounded-lg text-center">
             <h2 className="text-2xl mb-4">Game Over</h2>
+            <p className="text-xl">Score: {score}</p>
+            <p className="text-xl">Highscore: {highScore}</p
             <button onClick={handleRestart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Neustarten</button>
           </div>
         ) : (
