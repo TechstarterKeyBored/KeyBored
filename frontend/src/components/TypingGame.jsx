@@ -55,7 +55,7 @@ const typingGame = () => {
             top: 0,
             zoneIndex: zone.position,
             id: Date.now(),
-            timer: 7000,
+            timer: 12000,
           }],
       );
       }, 1500);
@@ -167,7 +167,7 @@ const typingGame = () => {
           <div className="absolute bg-red-700 text-white p-6 rounded-lg text-center">
             <h2 className="text-2xl mb-4">Game Over</h2>
             <p className="text-xl">Score: {score}</p>
-            <p className="text-xl">Highscore: {highScore}</p
+            <p className="text-xl">Highscore: {highScore}</p>
             <button onClick={handleRestart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Neustarten</button>
           </div>
         ) : (
@@ -175,7 +175,7 @@ const typingGame = () => {
             <div className="absolute top-4 left-4 text-white text-xl">
               Score: {score} | Highscore: {highScore} | Leben: {lives}
             </div>
-            <div className="absolute top-4 right-4 flex gap-4">
+            <div className="absolute top-4 right-4 flex gap-4 z-999">
               <button onClick={handlePause} className="bg-blue-500 text-white py-2 px-4 rounded">
                 {isPaused ? "Weiter" : "Pause"}
               </button>
