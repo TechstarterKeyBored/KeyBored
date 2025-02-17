@@ -3,14 +3,14 @@ import React, { useState, useEffect, use } from "react";
 
 //Definiert die zugehörigen Buchstaben den jeweiligen Positionen und Farben
 const fingerZones = [
-  {letters: "aqz", color: "brown", position: 0}, //Linker kleiner Finger
-  {letters: "wsx", color: "green", position: 1}, //Linker Ringfinger
-  {letters: "edc", color: "blue", position: 2}, //Linker Mittelfinger
-  {letters: "rfvtgb", color: "red", position: 3}, //Linker Zeigefinger
-  {letters: "zhnujm", color: "purple", position: 4}, // Rechter Zeigefinger
-  {letters: "ik", color: "blue", position: 5}, // Rechter Mittelfinger
-  {letters: "ol", color: "green", position: 6}, //Rechter Ringfinger
-  {letters: "pöüä", color: "brown", position: 7}, // Rechter kleiner Finger
+  { letters: "aqz", color: "brown", position: 0, label: "Kleiner Finger" },
+  { letters: "wsx", color: "green", position: 1, label: "Ringfinger" },
+  { letters: "edc", color: "blue", position: 2, label: "Mittelfinger" },
+  { letters: "rfvtgb", color: "red", position: 3, label: "Zeigefinger" },
+  { letters: "zhnujm", color: "purple", position: 4, label: "Zeigefinger" },
+  { letters: "ik", color: "blue", position: 5, label: "Mittelfinger" },
+  { letters: "ol", color: "green", position: 6, label: "Ringfinger "},
+  { letters: "pöüä", color: "brown", position: 7, label: "Kleiner Finger" },
 ];
 
 const typingGame = () => {
@@ -163,54 +163,60 @@ const typingGame = () => {
             <h2 className="text-2xl mb-4">Mach dich bereit!</h2>
             <p className="text-4xl">{countdown}</p>
           </div>
-        ) : lives === 0? (
+        ) : lives === 0 ? (
           <div className="absolute bg-red-700 text-white p-6 rounded-lg text-center">
-            <h2 className="text-2xl mb-4">Gamer Over</h2>
-            <p className="text-xl">Score: {score}</p>
-            <p className="text-xl">Highscore: {highScore}</p>
-            <button onClick={handleRestart}
-            className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Neustarten</button>
+            <h2 className="text-2xl mb-4">Game Over</h2>
+            <button onClick={handleRestart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Neustarten</button>
           </div>
         ) : (
           <>
-          <div className="absolute top-4 left-4 text-white text-xl">
-            Score: {score} | Highscore: {highScore} | Leben: {lives}
-          </div>
-          <div className="grid grid-cols-8 w-full h-5/6 border-b-2 border-white relative">
-          
-          {fallingLetters.map((item) => (
-            <div
-            key={item.id}
-            className="absolute text-2xl font-bold"
-            style={{
-              top: `${item.top}px`,
-              left: `calc(${item.zoneIndex * 12.5}% + 6.25%)`,
-              color: fingerZones[item.zoneIndex].color,
-            }}
-            >
-              {item.letter}
+            <div className="absolute top-4 left-4 text-white text-xl">
+              Score: {score} | Highscore: {highScore} | Leben: {lives}
             </div>
-          ))}
-          </div>
-          <div className="absolute bottom-10 flex gap-4">
-            <button onClick={handlePause} className="bg-blue-500 text-white py-2 px-4 rounded">
-              {isPaused ? "Weiter" : "Pause"}
-            </button>
-            <button onClick={handleRestart} className="bg-red-500 text-white py-2 px-4 rounded">Neustart</button>
-          </div>
+            <div className="absolute top-4 right-4 flex gap-4">
+              <button onClick={handlePause} className="bg-blue-500 text-white py-2 px-4 rounded">
+                {isPaused ? "Weiter" : "Pause"}
+              </button>
+              <button onClick={handleRestart} className="bg-red-500 text-white py-2 px-4 rounded">Neustart</button>
+            </div>
+            <div className="grid grid-cols-8 w-full h-5/6 border-b-2 border-white relative">
+              {fallingLetters.map((item) => (
+                <div
+                  key={item.id}
+                  className="absolute text-2xl font-bold"
+                  style={{
+                    top: `${item.top}px`,
+                    left: `calc(${item.zoneIndex * 12.5}% + 6.25%)`,
+                    color: fingerZones[item.zoneIndex].color,
+                  }}
+                >
+                  {item.letter}
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-8 w-full h-20 mt-4 border-t-2 border-white">
+              {fingerZones.map((zone) => (
+                <div
+                  key={zone.position}
+                  className="flex flex-col items-center justify-center text-black font-bold"
+                  style={{ backgroundColor: zone.color }}
+                >
+                  {zone.label}
+                </div>
+              ))}
+            </div>
           </>
         )
-        ):(
-          <div className="absolute bg-gray-800 text-white p-6 rounded-lg text-center mx-auto mt-10">
-            <h2 className="text-2xl mb-4">Typing Trainer</h2>
-            <p>Positioniere deine Finger auf der Tastatur!</p>
-            <p> Linke Hand: Kleiner Finger - A, Ringfinger - S, Mittelfinger - D, Zeigefinger - F</p>
-            <p> Rechte Hand:Kleiner Finger - Ö, Ringfinger - L, Mittelfinger - K, Zeigefinger - J</p>
-            <button onClick={handleStart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Spiel Starten</button>
-          </div>
-        )}
+      ) : (
+        <div className="absolute bg-gray-800 text-white p-6 rounded-lg text-center mx-auto mt-10">
+          <h2 className="text-2xl mb-4">Typing Trainer</h2>
+          <p>Positioniere deine Finger auf der Tastatur!</p>
+          <p> Linke Hand: Kleiner Finger - A, Ringfinger - S, Mittelfinger - D, Zeigefinger - F</p>
+          <p> Rechte Hand: Kleiner Finger - Ö, Ringfinger - L, Mittelfinger - K, Zeigefinger - J</p>
+          <button onClick={handleStart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Spiel Starten</button>
         </div>
-        );
+      )}
+    </div>
+  );
 };
-
 export default typingGame;
