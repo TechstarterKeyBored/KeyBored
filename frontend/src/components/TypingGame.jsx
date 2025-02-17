@@ -43,7 +43,6 @@ const typingGame = () => {
       const interval = setInterval(() => {
         const zone = fingerZones[Math.floor(Math.random() * fingerZones.length)];
         const letter = zone.letters[Math.floor(Math.random() * zone.letters.length)];
-        console.log('HIER', letter);
         const isUppperCase = Math.random() < 0.5;
         const letterToDisplay = isUppperCase
           ? letter.toUpperCase()
@@ -59,7 +58,7 @@ const typingGame = () => {
             timer: 7000,
           }],
       );
-      }, 3500);
+      }, 1500);
       return () => clearInterval(interval);
     }
   }, [isPaused, gameStarted, lives]);
@@ -72,11 +71,11 @@ const typingGame = () => {
         setFallingLetters((prev) => 
         prev.map((item) => ({
           ...item,
-          top: item.top + 2,
-          timer: item.timer - 200,
+          top: item.top + 20,
+          timer: item.timer - 250,
         }))
       );
-      }, 200);
+      }, 250);
       return () => clearInterval(moveInterval);
     };
   }, [isPaused, gameStarted, lives]);
@@ -178,13 +177,14 @@ const typingGame = () => {
             Score: {score} | Highscore: {highScore} | Leben: {lives}
           </div>
           <div className="grid grid-cols-8 w-full h-5/6 border-b-2 border-white relative">
+          
           {fallingLetters.map((item) => (
             <div
             key={item.id}
             className="absolute text-2xl font-bold"
             style={{
               top: `${item.top}px`,
-              left: `${item.zoneIndex * 12.5}%`,
+              left: `calc(${item.zoneIndex * 12.5}% + 6.25%)`,
               color: fingerZones[item.zoneIndex].color,
             }}
             >
@@ -193,7 +193,7 @@ const typingGame = () => {
           ))}
           </div>
           <div className="absolute bottom-10 flex gap-4">
-            <button onclick={handlePause} className="bg-blue-500 text-white py-2 px-4 rounded">
+            <button onClick={handlePause} className="bg-blue-500 text-white py-2 px-4 rounded">
               {isPaused ? "Weiter" : "Pause"}
             </button>
             <button onClick={handleRestart} className="bg-red-500 text-white py-2 px-4 rounded">Neustart</button>
