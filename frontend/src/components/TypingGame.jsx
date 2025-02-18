@@ -3,14 +3,14 @@ import React, { useState, useEffect, use } from "react";
 
 //Definiert die zugehörigen Buchstaben den jeweiligen Positionen und Farben
 const fingerZones = [
-  { letters: "aqz", color: "brown", position: 0, label: "Kleiner Finger" },
-  { letters: "wsx", color: "green", position: 1, label: "Ringfinger" },
-  { letters: "edc", color: "blue", position: 2, label: "Mittelfinger" },
-  { letters: "rfvtgb", color: "red", position: 3, label: "Zeigefinger" },
-  { letters: "zhnujm", color: "purple", position: 4, label: "Zeigefinger" },
-  { letters: "ik", color: "blue", position: 5, label: "Mittelfinger" },
-  { letters: "ol", color: "green", position: 6, label: "Ringfinger"},
-  { letters: "pöüä", color: "brown", position: 7, label: "Kleiner Finger" },
+  { letters: "aqz", color: "darkorange", position: 0, label: "Kleiner Finger" },
+  { letters: "wsx", color: "limegreen", position: 1, label: "Ringfinger" },
+  { letters: "edc", color: "royalblue", position: 2, label: "Mittelfinger" },
+  { letters: "rfvtgb", color: "#e11313", position: 3, label: "Zeigefinger" },
+  { letters: "zhnujm", color: "mediumorchid", position: 4, label: "Zeigefinger" },
+  { letters: "ik", color: "royalblue", position: 5, label: "Mittelfinger" },
+  { letters: "ol", color: "limegreen", position: 6, label: "Ringfinger"},
+  { letters: "pöüä", color: "darkorange", position: 7, label: "Kleiner Finger" },
 ];
 
 const typingGame = () => {
@@ -159,15 +159,15 @@ const typingGame = () => {
     <div className="relative w-3xl h-screen flex-col items-center justify-center mx-auto bg-white opacity-75">
       {gameStarted ? (
         countdown > 0 ? (
-          <div className="absolute bg-gray-800 text-white p-6 rounded-lg text-center">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white p-6 rounded-lg text-center">
             <h2 className="text-2xl mb-4">Mach dich bereit!</h2>
             <p className="text-4xl">{countdown}</p>
           </div>
         ) : lives === 0 ? (
-          <div className="absolute bg-red-700 text-white p-6 rounded-lg text-center">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-700 text-white p-6 w-50 rounded-lg text-center">
             <h2 className="text-2xl mb-4">Game Over</h2>
             <p className="text-xl">Score: {score}</p>
-            <p className="text-xl">Highscore: {highScore}</p
+            <p className="text-xl">Highscore: {highScore}</p>
             <button onClick={handleRestart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Neustarten</button>
           </div>
         ) : (
@@ -210,9 +210,9 @@ const typingGame = () => {
           </>
         )
       ) : (
-        <div className="absolute bg-gray-800 text-white p-6 rounded-lg text-center mx-auto mt-10">
-          <h2 className="text-2xl mb-4">Typing Trainer</h2>
-          <p>Positioniere deine Finger auf der Tastatur!</p>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white p-6 w-2xl rounded-lg text-center mx-auto mt-10">
+          <h2 className="text-amber-100 text-3xl font-bold text mb-4">Typing Trainer</h2>
+          <h2 className="text-amber-50 text-1xl mb-4">Positioniere deine Finger auf der Tastatur!</h2>
           <p> Linke Hand: Kleiner Finger - A, Ringfinger - S, Mittelfinger - D, Zeigefinger - F</p>
           <p> Rechte Hand: Kleiner Finger - Ö, Ringfinger - L, Mittelfinger - K, Zeigefinger - J</p>
           <button onClick={handleStart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Spiel Starten</button>
