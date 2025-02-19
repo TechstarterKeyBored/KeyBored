@@ -4,6 +4,8 @@ import { Play, Pause, RotateCcw } from "lucide-react";
 const KaraokePlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  // const [highScore, setHighScore] = useState(0);
+  // const [inputValue, setInputValue] = useState("");
   const audioRef = useRef(null);
 
   // Sample lyrics with timing (in seconds)
@@ -74,7 +76,7 @@ const KaraokePlayer = () => {
     if (isPlaying) {
       interval = setInterval(() => {
         setCurrentTime((time) => {
-          // if (time >= 1) return 0; // Loop back to start
+          // if (time >= 12) return 0; // Loop back to start
           return time + 0.1;
         });
       }, 100);
@@ -116,11 +118,17 @@ const KaraokePlayer = () => {
     }
   };
 
+  // const handleInput = (event) => {
+    // console.log(event.target.value);
+  // };
+
   return (
+    // Audio
     <div className="max-w-2xl mx-auto p-6 bg-gray-900 rounded-xl shadow-xl">
       <audio
         ref={audioRef}
-        src="/path-to-your-audio.mp3"
+        src="src/assets/audio/frozen.mp3"
+        // onTimeUpdate={(event) => setCurrentTime(event.target.currentTime)}
         onEnded={() => setIsPlaying(false)}
       />
 
@@ -156,9 +164,11 @@ const KaraokePlayer = () => {
           <RotateCcw className="w-6 h-6 text-white" />
         </button>
       </div>
-        <div className="flex justify-center my-8">
-          <input type="text" className="bg-gray-600 text-white" ></input>
-        </div>
+
+      {/* Text-Input */}
+      <div className="flex justify-center my-8">
+        <input type="text" className="bg-gray-600 text-white" ></input>
+      </div>
     </div>
   );
 };
