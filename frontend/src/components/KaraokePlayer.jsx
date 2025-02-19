@@ -4,8 +4,8 @@ import { Play, Pause, RotateCcw } from "lucide-react";
 const KaraokePlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  // const [highScore, setHighScore] = useState(0);
-  // const [inputValue, setInputValue] = useState("");
+  const [score, setScore] = useState(0);
+  const [inputValue, setInputValue] = useState("");
   const audioRef = useRef(null);
 
   // Sample lyrics with timing (in seconds)
@@ -76,7 +76,6 @@ const KaraokePlayer = () => {
     if (isPlaying) {
       interval = setInterval(() => {
         setCurrentTime((time) => {
-          // if (time >= 12) return 0; // Loop back to start
           return time + 0.1;
         });
       }, 100);
@@ -118,24 +117,22 @@ const KaraokePlayer = () => {
     }
   };
 
-  // const handleInput = (event) => {
-    // console.log(event.target.value);
-  // };
+  const handleInput = (event) => {
+    setInputValue(event.target.value);
+    if (inputValue === getCurrentLyric().text) {
+      event.target.value = "";
+      setScore((score) => score + 1);
+    }
+  };
 
   return (
     // Audio
-    <div className="max-w-2xl mx-auto p-6 bg-gray-900 rounded-xl shadow-xl">
+    <div >
       <audio
         ref={audioRef}
         src="src/assets/audio/frozen.mp3"
-        // onTimeUpdate={(event) => setCurrentTime(event.target.currentTime)}
         onEnded={() => setIsPlaying(false)}
       />
-
-      {/* Current time display */}
-      {/* <div className="text-gray-400 text-sm mb-4"> */}
-      {/* {Math.floor(currentTime)}:{((currentTime % 1) * 10).toFixed(0).padStart(1, '0')} */}
-      {/* </div> */}
 
       {/* Lyrics display */}
       <div className="space-y-6 mb-8">
@@ -167,7 +164,12 @@ const KaraokePlayer = () => {
 
       {/* Text-Input */}
       <div className="flex justify-center my-8">
-        <input type="text" className="bg-gray-600 text-white" ></input>
+        <input onInput={handleInput} type="text" className="bg-gray-600 text-white" ></input>
+      </div>
+      
+      {/* High score */}
+      <div className="text-center text-white">
+        <p>Score: {score}</p>
       </div>
     </div>
   );
