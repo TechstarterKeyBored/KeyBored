@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Play, Pause, RotateCcw } from "lucide-react";
 
 const KaraokePlayer = () => {
+  const [selectedSong, setSelectedSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [score, setScore] = useState(0);
@@ -9,7 +10,8 @@ const KaraokePlayer = () => {
   const audioRef = useRef(null);
 
   // Sample lyrics with timing (in seconds)
-  const lyrics = [
+  const songs = [
+    { title: "Frozen", src: "src/assets/audio/frozen.mp3", lyrics: [
     { time: 18, text: "you only see" },
     { time: 20, text: "what your eyes want to see" },
     { time: 22, text: "how can life be " },
@@ -68,7 +70,69 @@ const KaraokePlayer = () => {
     { time: 293.5, text: "mmmmmm" },
     { time: 297, text: "you hold" },
     { time: 302, text: "the key" },
-    { time: 306, text: "if i could melt your heart" },
+    { time: 306, text: "if i could melt your heart" }
+    ]},
+    { title: "I Love You Always Forever", src: "src/assets/audio/i-love-you-always-forever.mp3", lyrics: [
+    { time: 0, text: "Feels like Im standing in a timeless dream" },
+    { time: 9.5, text: "Of light mists with pale amber rose" },
+    { time: 17.8, text: "Feels like Im lost in a deep cloud of heavenly scent" },
+    { time: 29, text: "Touching discovering you" },
+    { time: 47.1, text: "Those days of warm rains come rushing back to me" },
+    { time: 55.7, text: "Miles of windless summer nights" },
+    { time: 64.7, text: "Secret moments shared within the heat of the afternoon" },
+    { time: 74.2, text: "Out of the stillness soft spoken words" },
+    { time: 82, text: " Say it say it again" },
+    { time: 84.3, text: " I love you always forever" },
+    { time: 86.6, text: " Near or far closer together" },
+    { time: 89, text: " Everywhere I will be with you" },
+    { time: 91.3, text: " Everything I will do for you" },
+    { time: 93.8, text: "I love you always forever" },
+    { time: 96.1, text: "Near or far closer together" },
+    { time: 98.3, text: "Everywhere I will be with you" },
+    { time: 100.7, text: "Everything I will do for you" },
+    { time: 102.7, text: "Youve got" },
+    { time: 104.8, text: "The most unbelievable blue eyes Ive ever seen" },
+    { time: 111.3, text: "Youve got" },
+    { time: 114.2, text: "Me almost melting away" },
+    { time: 120.7, text: "As we lay there" },
+    { time: 123.9, text: "Under a blue sky with pure white stars" },
+    { time: 129.6, text: "Exotic sweetness" },
+    { time: 133.5, text: "A magical time" },
+    { time: 138.5, text: "Say it say it again" },
+    { time: 140.1, text: "I love you always forever" },
+    { time: 142.2, text: "Near or far closer together" },
+    { time: 144.6, text: "Everywhere I will be with you" },
+    { time: 146.8, text: "Everything I will do for you" },
+    { time: 148.1, text: "I love you always forever" },
+    { time: 151.4, text: "Near or far closer together" },
+    { time: 153.7, text: "Everywhere I will be with you" },
+    { time: 156, text: "Everything I will do for you" },
+    { time: 158.3, text: "Say youll love and love me forever" },
+    { time: 160.8, text: "Never stop never whatever" },
+    { time: 163, text: "Near and far and always everywhere and everything" },
+    { time: 167.8, text: "Say youll love and love me forever" },
+    { time: 170, text: "Never stop never whatever" },
+    { time: 172.1, text: "Near and far and always everywhere and everything" },
+    { time: 176.9, text: "Say youll love and love me forever" },
+    { time: 179.3, text: "Never stop never whatever" },
+    { time: 181.5, text: "Near and far and always everywhere and everything" },
+    { time: 186, text: "Say youll love and love me forever" },
+    { time: 188.5, text: "Never stop never whatever" },
+    { time: 190.6, text: "Near and far and always everywhere and everything" },
+    { time: 204.1, text: "I love you always forever" },
+    { time: 206.9, text: "Near or far closer together" },
+    { time: 209.3, text: "Everywhere I will be with you" },
+    { time: 210.5, text: "Everything I will do for you" },
+    { time: 213.8, text: "I love you always forever" },
+    { time: 216.2, text: "Near or far closer together" },
+    { time: 218.5, text: "Everywhere I will be with you" },
+    { time: 220.9, text: "Everything I will do for you" },
+    { time: 223.3, text: "I love you always forever" },
+    { time: 225.6, text: "Near or far closer together" },
+    { time: 227.9, text: "Everywhere I will be with you" },
+    { time: 230.2, text: "Everything I will do for you" },
+    { time: 232.5, text: "I love you always forever" }
+    ]}
   ];
 
   useEffect(() => {
@@ -84,17 +148,17 @@ const KaraokePlayer = () => {
   }, [isPlaying]);
 
   const getCurrentLyric = () => {
-    const currentLyric = lyrics.reduce((prev, curr) => {
+    const currentLyric = songs.lyrics.reduce((prev, curr) => {
       if (curr.time <= currentTime) return curr;
       return prev;
-    }, lyrics[0]);
+    }, songs.lyrics[0]);
 
     return currentLyric;
   };
 
   const getNextLyric = () => {
-    const nextLyric = lyrics.find((lyric) => lyric.time > currentTime);
-    return nextLyric || lyrics[0];
+    const nextLyric = songs.lyrics.find((lyric) => lyric.time > currentTime);
+    return nextLyric || songs.lyrics[0];
   };
 
   const handlePlayPause = () => {
@@ -125,12 +189,27 @@ const KaraokePlayer = () => {
     }
   };
 
+  const setSong = (title) => {
+    const song = songs.find((song) => song.title === title);
+    if (audioRef.current) {
+      audioRef.current.src = song.src;
+    }
+  };
+
   return (
-    // Audio
     <div >
+
+      {/* Song-Auswahl */}
+      <div className="text-center text-white">
+        {songs.map((song) => (
+        <button key={song.title} onClick={() => setSong(song)} className="p-3 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors">{song.title}</button>
+        ))}
+      </div>
+
+      {/* Audio player */}
       <audio
         ref={audioRef}
-        src="src/assets/audio/frozen.mp3"
+        // src={songs.src}
         onEnded={() => setIsPlaying(false)}
       />
 
@@ -171,6 +250,7 @@ const KaraokePlayer = () => {
       <div className="text-center text-white">
         <p>Score: {score}</p>
       </div>
+
     </div>
   );
 };
