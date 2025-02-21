@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Play, Pause, RotateCcw } from "lucide-react";
 
-const KaraokePlayer = () => {
+const KaraokeTrainer = () => {
   const [selectedSong, setSelectedSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -143,7 +143,7 @@ const KaraokePlayer = () => {
     },
     {
       title: "Blue - All Rise",
-      src: "src/assets/audio/alwaysforever.mp3",
+      src: "src/assets/audio/allrise.mp3",
       lyrics: [
         { time: 0, text: "Instrumental" },
         { time: 6.7, text: "uh uh" },
@@ -217,7 +217,7 @@ const KaraokePlayer = () => {
 },
     {
       title: "Evanescence - My Immortal",
-      src: "src/assets/audio/alwaysforever.mp3",
+      src: "src/assets/audio/myimmortal.mp3",
       lyrics: [
         { time: 12.8, text: "im so tired of being here" },
         { time: 18.4, text: "suppressed by all my childish fears" },
@@ -251,7 +251,7 @@ const KaraokePlayer = () => {
 },
     {
       title: "Scorpions - Wind of Change",
-      src: "src/assets/audio/alwaysforever.mp3",
+      src: "src/assets/audio/windofchange.mp3",
       lyrics: [
         { time: 0, text: "Instrumental" },
         { time: 21.6, text: "i follow the moskva" },
@@ -304,7 +304,7 @@ const KaraokePlayer = () => {
 },
     {
       title: "Fools Garden - Lemon Tree",
-      src: "src/assets/audio/alwaysforever.mp3",
+      src: "src/assets/audio/lemontree.mp3",
       lyrics: [
         { time: 12.3, text: "im sittin here in the boring room" },  
         { time: 16.8, text: "its just another rainy sunday afternoon" },
@@ -353,7 +353,7 @@ const KaraokePlayer = () => {
 },
     {
       title: "Ricky Martin - Livin' La Vida Loca",
-      src: "src/assets/audio/alwaysforever.mp3",
+      src: "src/assets/audio/lavidaloca.mp3",
       lyrics: [
         { time: 10.6, text: "shes into superstitions" },
         { time: 13.7, text: "black cats and voodoo dolls" },
@@ -423,7 +423,7 @@ const KaraokePlayer = () => {
 },
     {
       title: "Toni Braxton - Unbreak my Heart",
-      src: "src/assets/audio/alwaysforever.mp3",
+      src: "src/assets/audio/unbreak.mp3",
       lyrics: [
         { time: 20, text: "dont leave me in all this pain" },
         { time: 24.6, text: "dont leave me out in the rain" },
@@ -476,7 +476,7 @@ const KaraokePlayer = () => {
 },
     {
       title: "Seal - Kiss From a Rose",
-      src: "src/assets/audio/alwaysforever.mp3",
+      src: "src/assets/audio/rose.mp3",
       lyrics: [
         { time: 23.6, text: "there used to be a graying tower alone on the sea" },
         { time: 30, text: "you became the light on the dark side of me" },
@@ -521,7 +521,7 @@ const KaraokePlayer = () => {
 },
     {
       title: "UNREAL KEYGOD",
-      src: "src/assets/audio/alwaysforever.mp3",
+      src: "src/assets/audio/keygod.mp3",
       lyrics: [
         { time: 6.2, text: "fill em with the venom and eliminate em other words i minute maid em" }, 
         { time: 8.1, text: "i dont wanna hurt em but i did im in a fit of rage im murderin again nobody will evade" },
@@ -671,4 +671,4 @@ const KaraokePlayer = () => {
   );
 };
 
-export default KaraokePlayer;
+export default KaraokeTrainer;
