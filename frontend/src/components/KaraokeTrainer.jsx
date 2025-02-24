@@ -548,6 +548,19 @@ const KaraokeTrainer = () => {
 },
 ];
 
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
+    }
+  };
+
+  const handleSongEnd = () => {
+    setIsPlaying(false);
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+    }
+  };
+
   useEffect(() => {
     if (selectedSong) {
       audioRef.current = new Audio(selectedSong.src);
