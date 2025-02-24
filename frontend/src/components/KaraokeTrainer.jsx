@@ -13,7 +13,7 @@ const KaraokeTrainer = () => {
   const songs = [
     {
       title: "Madonna - Frozen",
-      src: "src/assets/audio/frozen.mp3",
+      src: "public/music/frozen.mp3",
       lyrics: [
         { time: 18, text: "you only see" },
         { time: 20, text: "what your eyes want to see" },
@@ -78,7 +78,7 @@ const KaraokeTrainer = () => {
     },
     {
       title: "Donna Lewis - I Love You Always Forever",
-      src: "src/assets/audio/alwaysforever.mp3",
+      src:    "public/music/alwaysvorever.mp3",
       lyrics: [
         { time: 0, text: "Feels like Im standing in a timeless dream" },
         { time: 9.5, text: "Of light mists with pale amber rose" },
@@ -143,7 +143,7 @@ const KaraokeTrainer = () => {
     },
     {
       title: "Blue - All Rise",
-      src: "src/assets/audio/allrise.mp3",
+      src: "public/music/allrise.mp3",
       lyrics: [
         { time: 0, text: "Instrumental" },
         { time: 6.7, text: "uh uh" },
@@ -217,7 +217,7 @@ const KaraokeTrainer = () => {
 },
     {
       title: "Evanescence - My Immortal",
-      src: "src/assets/audio/myimmortal.mp3",
+      src: "public/music/myimmortal.mp3",
       lyrics: [
         { time: 12.8, text: "im so tired of being here" },
         { time: 18.4, text: "suppressed by all my childish fears" },
@@ -251,7 +251,7 @@ const KaraokeTrainer = () => {
 },
     {
       title: "Scorpions - Wind of Change",
-      src: "src/assets/audio/windofchange.mp3",
+      src: "public/music/windofchange.mp3",
       lyrics: [
         { time: 0, text: "Instrumental" },
         { time: 21.6, text: "i follow the moskva" },
@@ -304,7 +304,7 @@ const KaraokeTrainer = () => {
 },
     {
       title: "Fools Garden - Lemon Tree",
-      src: "src/assets/audio/lemontree.mp3",
+      src: "public/music/lemontree.mp3",
       lyrics: [
         { time: 12.3, text: "im sittin here in the boring room" },  
         { time: 16.8, text: "its just another rainy sunday afternoon" },
@@ -353,7 +353,7 @@ const KaraokeTrainer = () => {
 },
     {
       title: "Ricky Martin - Livin' La Vida Loca",
-      src: "src/assets/audio/lavidaloca.mp3",
+      src: "public/music/lavidaloca.mp3",
       lyrics: [
         { time: 10.6, text: "shes into superstitions" },
         { time: 13.7, text: "black cats and voodoo dolls" },
@@ -423,7 +423,7 @@ const KaraokeTrainer = () => {
 },
     {
       title: "Toni Braxton - Unbreak my Heart",
-      src: "src/assets/audio/unbreak.mp3",
+      src: "public/music/unbreak.mp3",
       lyrics: [
         { time: 20, text: "dont leave me in all this pain" },
         { time: 24.6, text: "dont leave me out in the rain" },
@@ -476,7 +476,7 @@ const KaraokeTrainer = () => {
 },
     {
       title: "Seal - Kiss From a Rose",
-      src: "src/assets/audio/rose.mp3",
+      src: "public/music/rose.mp3",
       lyrics: [
         { time: 23.6, text: "there used to be a graying tower alone on the sea" },
         { time: 30, text: "you became the light on the dark side of me" },
@@ -521,7 +521,7 @@ const KaraokeTrainer = () => {
 },
     {
       title: "UNREAL KEYGOD",
-      src: "src/assets/audio/keygod.mp3",
+      src: "public/music/keygod.mp3",
       lyrics: [
         { time: 6.2, text: "fill em with the venom and eliminate em other words i minute maid em" }, 
         { time: 8.1, text: "i dont wanna hurt em but i did im in a fit of rage im murderin again nobody will evade" },

@@ -11,7 +11,7 @@ import HelpSupport from "./pages/HelpSupport";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import PrivateRoute from "./PrivateRoute"; 
-import WordTrainer from "./components/WordTrainer/";
+import KaraokeTrainer from "./components/KaraokeTrainer/";
 import TypingGame from "./components/TypingGame/";
 import PageTransition from "./components/PageTransition";
 
@@ -24,7 +24,7 @@ function AnimatedRoutes() {
         <Route path="/" element={<PageTransition><Home /></PageTransition>} />
         <Route path="/introduction" element={<PageTransition><Introduction /></PageTransition>} />
         <Route path="/typing-trainer" element={<PageTransition><PrivateRoute element={TypingTrainer} /></PageTransition>} />
-        <Route path="/wordtrainer" element={<PageTransition><PrivateRoute element={WordTrainer} /></PageTransition>} />
+        <Route path="/Karaoketrainer" element={<PageTransition><PrivateRoute element={KaraokeTrainer} /></PageTransition>} />
         <Route path="/typinggame" element={<PageTransition><PrivateRoute element={TypingGame} /></PageTransition>} />
         <Route path="/help-support" element={<PageTransition><PrivateRoute element={HelpSupport} /></PageTransition>} />
         <Route path="/register" element={<PageTransition><Register /></PageTransition>} />

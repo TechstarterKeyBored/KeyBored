@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import WordTrainer from "../components/WordTrainer/";
+import KaraokeTrainer from "../components/KaraokeTrainer/";
 import TypingGame from "../components/TypingGame/";
 
 function TypingTrainer() {
@@ -22,7 +22,7 @@ function TypingTrainer() {
           TypingGame
         </button>
         <button
-          onClick={() => navigate("/WordTrainer")}
+          onClick={() => navigate("/KaraokeTrainer")}
           className="w-96 bg-blue-500 text-white rounded-lg text-4xl font-bold"
         >
           WordTrainer
