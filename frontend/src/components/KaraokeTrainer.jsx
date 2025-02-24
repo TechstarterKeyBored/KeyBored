@@ -546,6 +546,21 @@ const KaraokeTrainer = () => {
         { time: 36.1, text: "man stop look what im plannin haha" },
   ]},
 ];
+  // Set volume to 50%
+  useEffect(() => {
+    if (selectedSong) {
+      audioRef.current = new Audio(selectedSong.src);
+      audioRef.current.volume = 0.5; // Set volume to 50%
+      audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+      audioRef.current.addEventListener("ended", handleSongEnd);
+    }
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+        audioRef.current.removeEventListener("ended", handleSongEnd);
+      }
+    };
+  }, [selectedSong]);
 
   useEffect(() => {
     let interval;
