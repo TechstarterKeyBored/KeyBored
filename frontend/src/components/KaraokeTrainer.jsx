@@ -548,21 +548,19 @@ const KaraokeTrainer = () => {
 },
 ];
 
-  // Set volume to 50%
-  // useEffect(() => {
-  //   if (selectedSong) {
-  //     audioRef.current = new Audio(selectedSong.src);
-  //     audioRef.current.volume = 0.5; // Set volume to 50%
-  //     audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
-  //     audioRef.current.addEventListener("ended", handleSongEnd);
-  //   }
-  //   return () => {
-  //     if (audioRef.current) {
-  //       audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
-  //       audioRef.current.removeEventListener("ended", handleSongEnd);
-  //     }
-  //   };
-  // }, [selectedSong]);
+  useEffect(() => {
+    if (selectedSong) {
+      audioRef.current = new Audio(selectedSong.src);
+      audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+      audioRef.current.addEventListener("ended", handleSongEnd);
+    }
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+        audioRef.current.removeEventListener("ended", handleSongEnd);
+      }
+    };
+  }, [selectedSong]);
 
   useEffect(() => {
     let interval;
@@ -589,14 +587,18 @@ const KaraokeTrainer = () => {
     return nextLyric || selectedSong.lyrics[0];
   };
 
-  const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
+  const handlePlay = () => {
     if (audioRef.current) {
-      if (!isPlaying) {
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
+      audioRef.current.volume = 0.5;
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  const handlePause = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      setIsPlaying(false);
     }
   };
 
@@ -655,14 +657,16 @@ const KaraokeTrainer = () => {
       {/* Controls */}
       <div className="flex justify-center space-x-4">
         <button
-          onClick={handlePlayPause}
+          onClick={handlePlay}
           className="p-3 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
         >
-          {isPlaying ? (
-            <Pause className="w-6 h-6 text-white" />
-          ) : (
-            <Play className="w-6 h-6 text-white" />
-          )}
+          <Play className="w-6 h-6 text-white" />
+        </button>
+        <button
+          onClick={handlePause}
+          className="p-3 bg-gray-700 rounded-full hover:bg-gray-600 transition-colors"
+        >
+          <Pause className="w-6 h-6 text-white" />
         </button>
         <button
           onClick={handleReset}
