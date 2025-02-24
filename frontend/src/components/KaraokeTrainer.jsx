@@ -544,8 +544,10 @@ const KaraokeTrainer = () => {
         { time: 33.6, text: "im on the toilet bowl i got a trailer full of money" },
         { time: 35.1, text: "and im paid in full im not afraid to pull a" },
         { time: 36.1, text: "man stop look what im plannin haha" },
-  ]},
+  ],
+},
 ];
+
   // Set volume to 50%
   useEffect(() => {
     if (selectedSong) {
