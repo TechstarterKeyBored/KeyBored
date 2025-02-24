@@ -605,12 +605,12 @@ const KaraokeTrainer = () => {
   /* Song-Auswahl */
   if (!selectedSong)
     return (
-      <div className="grid w-1/2 rounded-xl grid-cols-2 gap-4 p-6 bg-gray-900 text-white mx-auto mt-10 shadow-2xl shadow-fuchsia-950">
+      <div className="grid w-1/2 rounded-xl grid-cols-2 gap-4 p-6 bg-gray-950 text-white mx-auto mt-10">
         {songs.map((song) => (
           <button
             key={song.title}
             onClick={() => setSelectedSong(song)}
-            className="p-3 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
+            className="p-3 bg-gray-900 rounded-2xl shadow-fuchsia-950 shadow-lg hover:shadow-xl transition-colors mt-4"
           >
             {song.title}
           </button>

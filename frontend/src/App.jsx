@@ -1,5 +1,5 @@
 import './App.css'
-import KaraokeTrainer from './components/KaraokePlayer';
+import KaraokeTrainer from './components/KaraokeTrainer';
 
 function App() {
   return(
