@@ -73,9 +73,10 @@ const typingGame = () => {
             .filter((item) => item.timer > 0) // Entferne Buchstaben mit Timer <= 0
             .map((item) => ({
               ...item,
-              top: item.top + 20,
-              timer: item.timer - 250,
-            }));
+              top: item.top + 15,
+              timer: item.timer - 200,
+            }))
+            .filter((item) => item.top < gameAreaHeight);
         });
       }, 250);
       return () => clearInterval(moveInterval);
