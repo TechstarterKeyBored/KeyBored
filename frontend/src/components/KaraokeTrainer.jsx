@@ -664,7 +664,8 @@ const KaraokeTrainer = () => {
     );
 
   return (
-    <div>
+    <div className="w-1/2 mx-auto">
+    <div className="bg-gray-800 rounded-2xl mt-25 p-5">
       {/* Audio player */}
       <audio
         ref={audioRef}
@@ -703,7 +704,7 @@ const KaraokeTrainer = () => {
       </div>
 
       {/* Text-Input */}
-      <div className="flex justify-center my-8">
+      <div className="flex justify-center my-8 mx-auto w-1/2">
         <input
           onInput={handleInput}
           type="text"
@@ -712,9 +713,17 @@ const KaraokeTrainer = () => {
       </div>
 
       {/* High score */}
-      <div className="text-center text-white">Score: {score}</div>
-
+        <div className="text-center text-white">Score: {score}</div>
+        {/* back button */}
+        <div className="w-full">
+        <button
+              onClick={() => setSelectedSong("")}
+            className="flex justify-self-end mr-2 p-2 bg-gray-600  text-white rounded-xl border-1 border-blue-500 hover:bg-blue-700 hover:border-blue-400"
+          >zur Songauswahl</button>
+      </div>
+      </div>
     </div>
+
   );
 };
 
