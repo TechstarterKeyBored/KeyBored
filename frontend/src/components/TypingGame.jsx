@@ -1,6 +1,5 @@
 import React, { useState, useEffect, use } from "react";
 
-
 //Definiert die zugehörigen Buchstaben den jeweiligen Positionen und Farben
 const fingerZones = [
   { letters: "aqz", color: "darkorange", position: 0, label: "Kleiner Finger" },
@@ -22,6 +21,7 @@ const typingGame = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [countdown, setCountdown] = useState(0)
+  const gameAreaRef = useRef(null);
 
   //Countdown funktion
   useEffect(() => {
@@ -49,14 +49,14 @@ const typingGame = () => {
           : letter.toLowerCase();
 
         setFallingLetters((prev) => 
-          [...prev,
-          {
-            letter: letterToDisplay,
-            top: 0,
-            zoneIndex: zone.position,
-            id: Date.now(),
-            timer: 12000,
-          }],
+        [...prev,
+        {
+          letter: letterToDisplay,
+          top: 0,
+          zoneIndex: zone.position,
+          id: Date.now(),
+          timer: 12000,
+        }],
       );
       }, 1500);
       return () => clearInterval(interval);
@@ -68,16 +68,18 @@ const typingGame = () => {
   useEffect(() => {
     if (!isPaused && gameStarted && lives > 0) {
       const moveInterval = setInterval(() => {
-        setFallingLetters((prev) => 
-        prev.map((item) => ({
-          ...item,
-          top: item.top + 20,
-          timer: item.timer - 250,
-        }))
-      );
+        setFallingLetters((prev) => {
+          return prev
+            .filter((item) => item.timer > 0) // Entferne Buchstaben mit Timer <= 0
+            .map((item) => ({
+              ...item,
+              top: item.top + 20,
+              timer: item.timer - 250,
+            }));
+        });
       }, 250);
       return () => clearInterval(moveInterval);
-    };
+    }
   }, [isPaused, gameStarted, lives]);
 
 
@@ -86,13 +88,16 @@ const typingGame = () => {
     if (!isPaused && gameStarted && lives > 0) {
     const lifeLossInterval = setInterval(() => {
       setFallingLetters((prev) => {
-        let newLives =lives;
+        let newLives = lives;
         const updatedLetters = prev.filter((item) => {
-          if (item.timer <= 0) {
-            newLives = Math.max(newLives - 1, 0);
-            return false;
+          if (gameAreaRef.current) {
+            const gameAreaHeight = gameAreaRef.current.offsetHeight; //Rufe die Höhe des Spielfeldes ab.
+            if (item.top > gameAreaHeight) {
+              newLives = Math.max(newLives - 1, 0);
+              return false; // Entferne Buchstaben, die die Ziellinie überschritten haben
+            }
           }
-          return true;
+          return item.timer > 0; // Entferne Buchstaben mit Timer <= 0
         });
 
         if (newLives !== lives) {
@@ -156,69 +161,69 @@ const typingGame = () => {
   };
 
   return (
-    <div className="relative w-3xl h-screen flex-col items-center justify-center mx-auto bg-white opacity-75">
-      {gameStarted ? (
-        countdown > 0 ? (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white p-6 rounded-lg text-center">
-            <h2 className="text-2xl mb-4">Mach dich bereit!</h2>
-            <p className="text-4xl">{countdown}</p>
-          </div>
-        ) : lives === 0 ? (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-700 text-white p-6 w-50 rounded-lg text-center">
-            <h2 className="text-2xl mb-4">Game Over</h2>
-            <p className="text-xl">Score: {score}</p>
-            <p className="text-xl">Highscore: {highScore}</p>
-            <button onClick={handleRestart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Neustarten</button>
-          </div>
-        ) : (
-          <>
-            <div className="absolute top-4 left-4 text-white text-xl">
-              Score: {score} | Highscore: {highScore} | Leben: {lives}
-            </div>
-            <div className="absolute top-4 right-4 flex gap-4 z-999">
-              <button onClick={handlePause} className="bg-blue-500 text-white py-2 px-4 rounded">
-                {isPaused ? "Weiter" : "Pause"}
-              </button>
-              <button onClick={handleRestart} className="bg-red-500 text-white py-2 px-4 rounded">Neustart</button>
-            </div>
-            <div className="grid grid-cols-8 w-full h-5/6 border-b-2 border-white relative">
-              {fallingLetters.map((item) => (
-                <div
-                  key={item.id}
-                  className="absolute text-2xl font-bold"
-                  style={{
-                    top: `${item.top}px`,
-                    left: `calc(${item.zoneIndex * 12.5}% + 6.25%)`,
-                    color: fingerZones[item.zoneIndex].color,
-                  }}
-                >
-                  {item.letter}
-                </div>
-              ))}
-            </div>
-            <div className="grid grid-cols-8 w-full h-20 mt-4 border-t-2 border-white">
-              {fingerZones.map((zone) => (
-                <div
-                  key={zone.position}
-                  className="flex flex-col items-center justify-center text-black font-bold"
-                  style={{ backgroundColor: zone.color }}
-                >
-                  {zone.label}
-                </div>
-              ))}
-            </div>
-          </>
-        )
-      ) : (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white p-6 w-2xl rounded-lg text-center mx-auto mt-10">
-          <h2 className="text-amber-100 text-3xl font-bold text mb-4">Typing Trainer</h2>
-          <h2 className="text-amber-50 text-1xl mb-4">Positioniere deine Finger auf der Tastatur!</h2>
-          <p> Linke Hand: Kleiner Finger - A, Ringfinger - S, Mittelfinger - D, Zeigefinger - F</p>
-          <p> Rechte Hand: Kleiner Finger - Ö, Ringfinger - L, Mittelfinger - K, Zeigefinger - J</p>
-          <button onClick={handleStart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Spiel Starten</button>
+  <div className="relative w-2xl h-screen flex-col items-center justify-center mx-auto bg-white opacity-75">
+    {gameStarted ? (
+      countdown > 0 ? (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white p-6 rounded-lg text-center">
+          <h2 className="text-2xl mb-4">Mach dich bereit!</h2>
+          <p className="text-4xl">{countdown}</p>
         </div>
-      )}
-    </div>
-  );
+      ) : lives === 0 ? (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-700 text-white p-6 w-50 rounded-lg text-center">
+          <h2 className="text-2xl mb-4">Game Over</h2>
+          <p className="text-xl">Score: {score}</p>
+          <p className="text-xl">Highscore: {highScore}</p>
+          <button onClick={handleRestart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Neustarten</button>
+        </div>
+      ) : (
+        <>
+          <div className="absolute top-4 left-4 text-white text-xl">
+            Score: {score} | Highscore: {highScore} | Leben: {lives}
+          </div>
+          <div className="absolute top-4 right-4 flex gap-4 z-999">
+            <button onClick={handlePause} className="bg-blue-500 text-white py-2 px-4 rounded">
+              {isPaused ? "Weiter" : "Pause"}
+            </button>
+            <button onClick={handleRestart} className="bg-red-500 text-white py-2 px-4 rounded">Neustart</button>
+          </div>
+          <div ref={gameAreaRef} className="grid grid-cols-8 w-full h-4/6 border-b-2 border-white relative">
+            {fallingLetters.map((item) => (
+              <div
+                key={item.id}
+                className="absolute text-2xl font-bold"
+                style={{
+                  top: `${item.top}px`,
+                  left: `calc(${item.zoneIndex * 12.5}% + 6.25%)`,
+                  color: fingerZones[item.zoneIndex].color,
+                }}
+              >
+                {item.letter}
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-8 w-full h-20 mt-4 border-t-2 border-white">
+            {fingerZones.map((zone) => (
+              <div
+                key={zone.position}
+                className="flex flex-col items-center justify-center text-black font-bold"
+                style={{ backgroundColor: zone.color }}
+              >
+                {zone.label}
+              </div>
+            ))}
+          </div>
+        </>
+      )
+    ) : (
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white p-6 w-2xl rounded-lg text-center mx-auto mt-10">
+        <h2 className="text-amber-100 text-3xl font-bold text mb-4">Typing Trainer</h2>
+        <h2 className="text-amber-50 text-1xl mb-4">Positioniere deine Finger auf der Tastatur!</h2>
+        <p> Linke Hand: Kleiner Finger - A, Ringfinger - S, Mittelfinger - D, Zeigefinger - F</p>
+        <p> Rechte Hand: Kleiner Finger - Ö, Ringfinger - L, Mittelfinger - K, Zeigefinger - J</p>
+        <button onClick={handleStart} className="mt-4 bg-green-500 text-white py-2 px-6 rounded">Spiel Starten</button>
+      </div>
+    )}
+  </div>
+);
 };
 export default typingGame;
