@@ -70,7 +70,6 @@ const typingGame = () => {
       const moveInterval = setInterval(() => {
         setFallingLetters((prev) => {
           return prev
-            .filter((item) => item.timer > 0) // Entferne Buchstaben mit Timer <= 0
             .map((item) => ({
               ...item,
               top: item.top + 15,
@@ -92,8 +91,8 @@ const typingGame = () => {
         let newLives = lives;
         const updatedLetters = prev.filter((item) => {
           if (gameAreaRef.current) {
-            const gameAreaHeight = gameAreaRef.current.offsetHeight; //Rufe die Höhe des Spielfeldes ab.
-            if (item.top > gameAreaHeight) {
+            const gameAreaHeight = gameAreaRef.current.offsetHeight || 600; //Rufe die Höhe des Spielfeldes ab.
+            if (item.top >= gameAreaHeight) {
               newLives = Math.max(newLives - 1, 0);
               return false; // Entferne Buchstaben, die die Ziellinie überschritten haben
             }
