@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 
 //Definiert die zugehörigen Buchstaben den jeweiligen Positionen und Farben
 const fingerZones = [
-  { letters: "aq", color: "darkorange", position: 0, label: "Kleiner Finger" },
+  { letters: "aqy", color: "darkorange", position: 0, label: "Kleiner Finger" },
   { letters: "wsx", color: "limegreen", position: 1, label: "Ringfinger" },
   { letters: "edc", color: "royalblue", position: 2, label: "Mittelfinger" },
   { letters: "rfvtgb", color: "#e11313", position: 3, label: "Zeigefinger" },
-  { letters: "zhnujm", color: "mediumorchid", position: 4, label: "Zeigefinger" },
+  { letters: "zhnujm", color: "#e13b13", position: 4, label: "Zeigefinger" },
   { letters: "ik", color: "royalblue", position: 5, label: "Mittelfinger" },
   { letters: "ol", color: "limegreen", position: 6, label: "Ringfinger" },
   { letters: "pöüä", color: "darkorange", position: 7, label: "Kleiner Finger" },
@@ -89,8 +89,7 @@ const TypingGame = () => {
         const index = prev.findIndex((item) => item.letter === event.key);
         if (index !== -1) {
           const newScore = score + 1;
-          setScore(newScore);
-
+          setScore(newScore);  
           //Highscore
           if (newScore > highScore) {
             setHighScore(newScore);
@@ -131,7 +130,7 @@ const TypingGame = () => {
   };
 
   return (
-    <div className="relative w-2xl h-screen flex-col items-center justify-center mx-auto bg-white opacity-75">
+    <div className="relative w-[70%] h-[83vh] flex-col items-center justify-center mx-auto bg-gray-800  opacity-75 shadow-2xl">
       {gameStarted ? (
         countdown > 0 ? (
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white p-6 rounded-lg text-center">
@@ -147,16 +146,16 @@ const TypingGame = () => {
           </div>
         ) : (
           <>
-            <div className="absolute top-4 left-4 text-white text-xl">
+            <div className="absolute top-4 left-4 font-bold text-white text-xl">
               Score: {score} | Highscore: {highScore} | Leben: {lives}
             </div>
-            <div className="absolute top-4 right-4 flex gap-4 z-999">
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4 z-999">
               <button onClick={handlePause} className="bg-blue-500 text-white py-2 px-4 rounded">
                 {isPaused ? "Weiter" : "Pause"}
               </button>
               <button onClick={handleRestart} className="bg-red-500 text-white py-2 px-4 rounded">Neustart</button>
             </div>
-            <div ref={gameAreaRef} className="grid grid-cols-8 w-full h-4/6 border-b-2 border-white relative">
+            <div ref={gameAreaRef} className="grid grid-cols-8 w-full h-[70%] border-white relative">
               {fallingLetters.map((item) => (
                 <div
                   key={item.id}
@@ -171,12 +170,12 @@ const TypingGame = () => {
                 </div>
               ))}
             </div>
-            <div className="grid grid-cols-8 w-full h-20 mt-4 border-t-2 border-white">
+            <div className="grid grid-cols-8 w-full h-20 mt-4 border-t-2 border-s-violet-200 border-white">
               {fingerZones.map((zone) => (
                 <div
                   key={zone.position}
                   className="flex flex-col items-center justify-center text-black font-bold"
-                  style={{ backgroundColor: zone.color }}
+                  style={{ backgroundColor: zone.color, borderRadius:"12px" }}
                 >
                   {zone.label}
                 </div>
