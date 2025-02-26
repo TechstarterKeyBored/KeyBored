@@ -669,9 +669,22 @@ const KaraokeTrainer = () => {
     const newValue = event.target.value.toLowerCase();
     const currentLyric = getCurrentLyric().text.toLowerCase();
     
-    if (newValue === currentLyric) {
+    // lyrics auf einzelne Wörter teilen
+    const inputWords = newValue.trim().split(/\s+/);
+    const lyricWords = currentLyric.split(/\s+/);
+    
+    // Zähle korrekt eingegebene Wörter
+    let correctWords = 0;
+    inputWords.forEach((word, index) => {
+      if (index < lyricWords.length && word === lyricWords[index]) {
+        correctWords++;
+      }
+    });
+
+    // Wenn alle Wörter korrekt eingegeben wurden, lösche den Text und erhöhe den Scoring
+    if (correctWords === lyricWords.length && inputWords.length === lyricWords.length) {
       setInputValue("");
-      setScore((score) => score + 1);
+      setScore((score) => score + correctWords);
     } else {
       setInputValue(newValue);
     }
