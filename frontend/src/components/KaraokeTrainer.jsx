@@ -9,6 +9,7 @@ const KaraokeTrainer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [score, setScore] = useState(0);
   const [inputValue, setInputValue] = useState("");
+  const [currentLyricIndex, setCurrentLyricIndex] = useState(-1);
   const audioRef = useRef(null);
 
   // Sample lyrics with timing (in seconds)
@@ -604,6 +605,27 @@ const KaraokeTrainer = () => {
     return () => clearInterval(interval);
   }, [isPlaying]);
 
+  useEffect(() => {
+    if (selectedSong && isPlaying) {
+      const updateLyrics = () => {
+        const time = audioRef.current.currentTime;
+        setCurrentTime(time);
+        const currentIndex = selectedSong.lyrics.findIndex(
+          (lyric, index) =>
+            time >= lyric.time &&
+            (!selectedSong.lyrics[index + 1] ||
+              time < selectedSong.lyrics[index + 1].time)
+        );
+        if (currentIndex !== currentLyricIndex) {
+          setCurrentLyricIndex(currentIndex);
+          setInputValue(""); // Clear input when new lyric appears
+        }
+      };
+      const interval = setInterval(updateLyrics, 100);
+      return () => clearInterval(interval);
+    }
+  }, [selectedSong, isPlaying, currentLyricIndex]);
+
   const getCurrentLyric = () => {
     const currentLyric = selectedSong.lyrics.reduce((prev, curr) => {
       if (curr.time <= currentTime) return curr;
@@ -644,10 +666,14 @@ const KaraokeTrainer = () => {
   };
 
   const handleInput = (event) => {
-    setInputValue(event.target.value);
-    if (inputValue === getCurrentLyric().text) {
-      event.target.value = "";
+    const newValue = event.target.value.toLowerCase();
+    const currentLyric = getCurrentLyric().text.toLowerCase();
+    
+    if (newValue === currentLyric) {
+      setInputValue("");
       setScore((score) => score + 1);
+    } else {
+      setInputValue(newValue);
     }
   };
 
@@ -713,10 +739,11 @@ const KaraokeTrainer = () => {
       {/* Text-Input */}
       <div className="flex justify-center my-8 mx-auto ">
         <input
-          onInput={handleInput}
+          value={inputValue}
+          onChange={handleInput}
           type="text"
           className="bg-gray-600 text-white w-1/2 h-10 rounded-xl border-1 border-white"
-        ></input>
+        />
       </div>
 
       {/* High score */}
