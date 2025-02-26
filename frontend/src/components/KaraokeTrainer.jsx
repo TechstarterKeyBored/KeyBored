@@ -626,6 +626,31 @@ const KaraokeTrainer = () => {
     }
   }, [selectedSong, isPlaying, currentLyricIndex]);
 
+  const handleInput = (event) => {
+    const newValue = event.target.value.toLowerCase();
+    const currentLyric = getCurrentLyric().text.toLowerCase();
+    
+    // Erstelle Sets für die Wörter
+    const lyricWords = new Set(currentLyric.split(/\s+/));
+    const oldInputWords = new Set(inputValue.toLowerCase().trim().split(/\s+/));
+    const newInputWords = new Set(newValue.trim().split(/\s+/));
+    
+    // Zähle neue korrekte Wörter
+    let newCorrectWords = 0;
+    for (const word of newInputWords) {
+      if (lyricWords.has(word) && !oldInputWords.has(word)) {
+        newCorrectWords++;
+      }
+    }
+    
+    // Erhöhe den Score für neue korrekte Wörter
+    if (newCorrectWords > 0) {
+      setScore(prevScore => prevScore + newCorrectWords);
+    }
+    
+    setInputValue(newValue);
+  };
+
   const getCurrentLyric = () => {
     const currentLyric = selectedSong.lyrics.reduce((prev, curr) => {
       if (curr.time <= currentTime) return curr;
@@ -662,31 +687,6 @@ const KaraokeTrainer = () => {
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
       audioRef.current.pause();
-    }
-  };
-
-  const handleInput = (event) => {
-    const newValue = event.target.value.toLowerCase();
-    const currentLyric = getCurrentLyric().text.toLowerCase();
-    
-    // lyrics auf einzelne Wörter teilen
-    const inputWords = newValue.trim().split(/\s+/);
-    const lyricWords = currentLyric.split(/\s+/);
-    
-    // Zähle korrekt eingegebene Wörter
-    let correctWords = 0;
-    inputWords.forEach((word, index) => {
-      if (index < lyricWords.length && word === lyricWords[index]) {
-        correctWords++;
-      }
-    });
-
-    // Wenn alle Wörter korrekt eingegeben wurden, lösche den Text und erhöhe den Scoring
-    if (correctWords === lyricWords.length && inputWords.length === lyricWords.length) {
-      setInputValue("");
-      setScore((score) => score + correctWords);
-    } else {
-      setInputValue(newValue);
     }
   };
 
