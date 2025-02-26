@@ -659,7 +659,7 @@ const KaraokeTrainer = () => {
           <button
             key={song.title}
             onClick={() => setSelectedSong(song)}
-            className="flex flex-col justify-center p-3 bg-gray-900 border-1 border-gray-400 rounded-2xl shadow-fuchsia-900 shadow-lg hover:scale-103 hover:shadow-xl transition-all mt-4"
+            className="flex flex-col justify-center p-3 bg-gray-900 border-1 border-gray-400 rounded-2xl shadow-fuchsia-900 shadow-lg hover:scale-104 hover:shadow-xl transition-all mt-4"
           >
             {song.title}
             <div className="flex justify-center m-1">
@@ -692,19 +692,19 @@ const KaraokeTrainer = () => {
       <div className="flex justify-center space-x-4">
         <button
           onClick={handlePlay}
-          className="p-3 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
+          className="p-3 bg-fuchsia-700 rounded-full hover:bg-fuchsia-800 transition-colors"
         >
           <Play className="w-6 h-6 text-white" />
         </button>
         <button
           onClick={handlePause}
-          className="p-3 bg-gray-700 rounded-full hover:bg-gray-600 transition-colors"
+          className="p-3 bg-gray-900 rounded-full hover:bg-gray-600 transition-colors"
         >
           <Pause className="w-6 h-6 text-white" />
         </button>
         <button
           onClick={handleReset}
-          className="p-3 bg-gray-700 rounded-full hover:bg-gray-600 transition-colors"
+          className="p-3 bg-gray-900 rounded-full hover:bg-gray-600 transition-colors"
         >
           <RotateCcw className="w-6 h-6 text-white" />
         </button>
@@ -725,7 +725,7 @@ const KaraokeTrainer = () => {
         <div className="w-full">
           <button
             onClick={() => { setSelectedSong(""), handleReset() }}
-            className="flex justify-self-center m-2 p-2 bg-gray-700  text-white rounded-xl border-1 border-white hover:bg-gray-600 "
+            className="flex justify-self-center m-2 p-2 bg-gray-900  text-white rounded-xl border-1 border-white hover:bg-gray-600 "
           >zur Songauswahl</button>
       </div>
       </div>
