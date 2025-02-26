@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Introduction from "./pages/Einfuhrung";
+import Impressum from "./pages/Impressum";
+import Datenschutz from "./pages/Datenschutz";
 import TypingTrainer from "./pages/TypingTrainer";
 import HelpSupport from "./pages/HelpSupport";
 import Register from "./pages/Register";
@@ -23,6 +25,8 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><Home /></PageTransition>} />
         <Route path="/introduction" element={<PageTransition><Introduction /></PageTransition>} />
+        <Route path="/impressum" element={<PageTransition><Impressum /></PageTransition>} />
+        <Route path="/datenschutz" element={<PageTransition><Datenschutz /></PageTransition>} />
         <Route path="/typing-trainer" element={<PageTransition><PrivateRoute element={TypingTrainer} /></PageTransition>} />
         <Route path="/Karaoketrainer" element={<PageTransition><PrivateRoute element={KaraokeTrainer} /></PageTransition>} />
         <Route path="/typinggame" element={<PageTransition><PrivateRoute element={TypingGame} /></PageTransition>} />
