@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Play, Pause, RotateCcw, Star, Skull } from "lucide-react";
 
 const KaraokeTrainer = () => {
   const [selectedSong, setSelectedSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const navigate = useNavigate();
   const [currentTime, setCurrentTime] = useState(0);
   const [score, setScore] = useState(0);
   const [inputValue, setInputValue] = useState("");
@@ -558,32 +560,37 @@ const KaraokeTrainer = () => {
     },
   ];
 
-  const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime);
-    }
-  };
-
-  const handleSongEnd = () => {
-    setIsPlaying(false);
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-    }
-  };
 
   useEffect(() => {
     if (selectedSong) {
-      audioRef.current = new Audio(selectedSong.src);
-      audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
-      audioRef.current.addEventListener("ended", handleSongEnd);
+      audioRef.current.src = selectedSong.src;
+      audioRef.current.volume = 0.1;
+      audioRef.current.onended = () => setIsPlaying(false);
     }
+
     return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
-        audioRef.current.removeEventListener("ended", handleSongEnd);
-      }
+      stopAudio(); 
     };
   }, [selectedSong]);
+
+  useEffect(() => {
+    const stopAudioOnUnload = () => stopAudio();
+
+ 
+    window.addEventListener("beforeunload", stopAudioOnUnload);
+    return () => window.removeEventListener("beforeunload", stopAudioOnUnload);
+  }, []);
+
+  useEffect(() => {
+    return () => stopAudio(); 
+  }, [navigate]); 
+
+  const stopAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  };
 
   useEffect(() => {
     let interval;
