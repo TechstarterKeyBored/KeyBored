@@ -25,17 +25,11 @@ const typingGame = () => {
 
   //Countdown funktion
   useEffect(() => {
-    let countdownTimer;
     if (gameStarted && countdown > 0) {
-      countdownTimer = setInterval(() => {
-        setCountdown((prev) => prev - 1);
-      }, 1000);
-    }else if (countdown === 0 && gameStarted) {
-      setShowInstructions(false);
+      const timer = setInterval(() => setCountdown((prev) => prev -1), 1000);
+      return () => clearInterval(timer);
     }
-    return () => clearInterval(countdownTimer);
   }, [gameStarted, countdown]);
-
 
   //Generieren von Buchstaben in den Zonen
   useEffect(() => {
@@ -55,7 +49,6 @@ const typingGame = () => {
           top: 0,
           zoneIndex: zone.position,
           id: Date.now(),
-          timer: 12000,
         }],
       );
       }, 1500);
@@ -63,54 +56,27 @@ const typingGame = () => {
     }
   }, [isPaused, gameStarted, lives]);
 
-
-  //Lässt die Buchstaben nach unten fallen
   useEffect(() => {
     if (!isPaused && gameStarted && lives > 0) {
       const moveInterval = setInterval(() => {
         setFallingLetters((prev) => {
           return prev
-            .map((item) => ({
-              ...item,
-              top: item.top + 15,
-              timer: item.timer - 200,
-            }))
-            .filter((item) => item.top < gameAreaHeight);
+            .map((item) => ({ ...item, top: item.top + 15 }))
+            .filter((item) => {
+              if (gameAreaRef.current) {
+                const gameAreaHeight = gameAreaRef.current.offsetHeight || 600;
+                if(item.top >= gameAreaHeight - 50) {
+              setLives((prevLives) => Math.max(prevLives - 1, 0));
+              return false;
+            }
+          }
+          return true;
         });
+      });
       }, 250);
       return () => clearInterval(moveInterval);
     }
   }, [isPaused, gameStarted, lives]);
-
-
-  //Entfernt die Buchstaben wenn sie zu weit unten sind und verringert Leben
-  useEffect(() => {
-    if (!isPaused && gameStarted && lives > 0) {
-    const lifeLossInterval = setInterval(() => {
-      setFallingLetters((prev) => {
-        let newLives = lives;
-        const updatedLetters = prev.filter((item) => {
-          if (gameAreaRef.current) {
-            const gameAreaHeight = gameAreaRef.current.offsetHeight || 600; //Rufe die Höhe des Spielfeldes ab.
-            if (item.top >= gameAreaHeight) {
-              newLives = Math.max(newLives - 1, 0);
-              return false; // Entferne Buchstaben, die die Ziellinie überschritten haben
-            }
-          }
-          return item.timer > 0; // Entferne Buchstaben mit Timer <= 0
-        });
-
-        if (newLives !== lives) {
-          setLives(newLives);
-        }
-
-        return updatedLetters;
-      });
-    }, 200);
-    return () => clearInterval(lifeLossInterval);
-  }
-  }, [isPaused, gameStarted, lives]);
-
 
   //Tastatureingabe
   const handleKeyPress = (event) => {
