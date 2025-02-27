@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 
 //Definiert die zugehörigen Buchstaben den jeweiligen Positionen und Farben
 const fingerZones = [
-  { letters: "aqy", color: "darkorange", position: 0, label: "Kleiner Finger" },
-  { letters: "wsx", color: "limegreen", position: 1, label: "Ringfinger" },
-  { letters: "edc", color: "royalblue", position: 2, label: "Mittelfinger" },
-  { letters: "rfvtgb", color: "#e11313", position: 3, label: "Zeigefinger" },
-  { letters: "zhnujm", color: "#e13b13", position: 4, label: "Zeigefinger" },
-  { letters: "ik", color: "royalblue", position: 5, label: "Mittelfinger" },
-  { letters: "ol", color: "limegreen", position: 6, label: "Ringfinger" },
-  { letters: "pöüä", color: "darkorange", position: 7, label: "Kleiner Finger" },
+  { letters: "aqy", color: "#FADA7A", position: 0, label: "Kleiner Finger" },
+  { letters: "wsx", color: "#A6F1E0", position: 1, label: "Ringfinger" },
+  { letters: "edc", color: "#B2A5FF", position: 2, label: "Mittelfinger" },
+  { letters: "rfvtgb", color: "#DE3163", position: 3, label: "Zeigefinger" },
+  { letters: "zhnujm", color: "#DE3163", position: 4, label: "Zeigefinger" },
+  { letters: "ik", color: "#B2A5FF", position: 5, label: "Mittelfinger" },
+  { letters: "ol", color: "#A6F1E0", position: 6, label: "Ringfinger" },
+  { letters: "pöüä", color: "#FADA7A", position: 7, label: "Kleiner Finger" },
 ];
 
 const TypingGame = () => {
@@ -22,6 +22,7 @@ const TypingGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const gameAreaRef = useRef(null);
+  const [activeZones, setActiveZones] = useState([]);
 
   //Countdown funktion
   useEffect(() => {
@@ -99,14 +100,29 @@ const TypingGame = () => {
         }
         return prev;
       });
+      const zone = fingerZones.find((z) => z.letters.includes(event.key.toLowerCase()));
+      if (zone){
+        setActiveZones((prev) => [...new Set([...prev, zone.position])]);
+      }
+    }
+  };
+
+  const handleKeyRelease = (event) => {
+    const zone = fingerZones.find((z) => z.letters.includes(event.key.toLowerCase()));
+    if (zone) {
+      setActiveZones((prev) => prev.filter((pos) => pos !== zone.position));
     }
   };
 
   //eventlistener für Tastatureingabe
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
-    return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [handleKeyPress]);
+    window.addEventListener("keyup", handleKeyRelease);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+      window.removeEventListener("keyup", handleKeyRelease);
+    };
+  }, [handleKeyPress, handleKeyRelease]);
 
   //Pausieren und Fortsetzen des Spiels
   const handlePause = () => {
@@ -175,7 +191,7 @@ const TypingGame = () => {
                 <div
                   key={zone.position}
                   className="flex flex-col items-center justify-center text-black font-bold"
-                  style={{ backgroundColor: zone.color, borderRadius:"12px" }}
+                  style={{ backgroundColor: zone.color, borderRadius:"12px", filter: activeZones.includes(zone.position) ? "brightness(1.5)" : "brightness(1)"}}
                 >
                   {zone.label}
                 </div>
