@@ -28,7 +28,7 @@ function HelpSupport() {
     );
 
     // Mail-Link erstellen und öffnen
-    const mailtoLink = `mailto:support@keybored.com?subject=${emailSubject}&body=${emailBody}`;
+    const mailtoLink = `mailto:vitali.mack@tn.techstarter.de?subject=${emailSubject}&body=${emailBody}`;
     window.location.href = mailtoLink;
   };
 
