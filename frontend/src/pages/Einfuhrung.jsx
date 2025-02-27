@@ -1,14 +1,14 @@
 import React from 'react';
 
-function Introduction() {
+function Einführung() {
   return (
-    <div className="p-8 mx-auto w-4xl mt-5">
-      <h2 className="text-3xl font-bold mb-8 text-white">Einführung</h2>
-      <p className="text-white">
-        Hier kommt später die Einführung in den Typing-Trainer.
-      </p>
-    </div>
+        <div className="w-screen h-[65vh] overflow-hidden">
+          <video className="w-[130vh] h-[60vh] mx-auto mt-10 object-cover" controls>
+            <source src="/videos/Einführung.mp4" type="video/mp4" />
+            Dein Browser unterstützt das Video-Tag nicht.
+          </video>
+        </div>
   );
 }
 
-export default Introduction;
+export default Einführung;
