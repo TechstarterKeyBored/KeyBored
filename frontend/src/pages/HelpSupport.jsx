@@ -50,7 +50,7 @@ function HelpSupport() {
       <div className="mb-8">
         <p className="text-white text-lg leading-relaxed">
           Haben Sie Fragen oder benötigen Unterstützung bei der Nutzung unserer Anwendung? 
-          Wir helfen Ihnen gerne weiter! Füllen Sie einfach das folgende Formular aus, 
+          Wir helfen Ihnen gerne weiter! Füllen Sie einfach das folgende Formular aus 
           und unser Support-Team wird sich so schnell wie möglich bei Ihnen melden.
         </p>
       </div>
