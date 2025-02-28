@@ -7,7 +7,7 @@ function TypingTrainer() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center gap-4 p-10 w-4xl mx-auto">
+    <div className="flex flex-col items-center gap-4 p-7 w-4xl mx-auto">
       <h1 className="text-4xl font-semibold text-amber-100 mt-10">Willkommen im TypingTrainer</h1>
       <p className="text-white p-4 text-md text-center mt-2">
         Hier kannst du zwischen unseren 2 Modis auswählen. Wenn du neu bist in der Welt des
