@@ -45,7 +45,7 @@ function HelpSupport() {
           }
         `}
       </style>
-      <h2 className="text-3xl font-bold mb-8 text-white">Hilfe & Support</h2>
+      <h2 className="text-3xl font-bold mb-8 text-amber-100">Hilfe & Support</h2>
       
       <div className="mb-8">
         <p className="text-white text-lg leading-relaxed">
