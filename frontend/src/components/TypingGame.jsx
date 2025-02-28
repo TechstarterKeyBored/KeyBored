@@ -201,7 +201,7 @@ const TypingGame = () => {
         )
       ) : (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white p-6 w-2xl rounded-lg text-center mx-auto mt-10">
-          <h2 className="text-amber-100 text-3xl font-bold text mb-4">Typing Trainer</h2>
+          <h2 className="text-amber-100 text-3xl font-bold text mb-4">Typing Game</h2>
           <h2 className="text-amber-50 text-1xl mb-4">Positioniere deine Finger auf der Tastatur!</h2>
           <p> Linke Hand: Kleiner Finger - A, Ringfinger - S, Mittelfinger - D, Zeigefinger - F</p>
           <p> Rechte Hand: Kleiner Finger - Ö, Ringfinger - L, Mittelfinger - K, Zeigefinger - J</p>

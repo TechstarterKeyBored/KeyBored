@@ -45,17 +45,17 @@ function HelpSupport() {
           }
         `}
       </style>
-      <h2 className="text-3xl font-bold mb-8 text-amber-100">Hilfe & Support</h2>
+      <h2 className="text-4xl text-center font-semibold mb-8 text-amber-100 mt-8">Hilfe & Support</h2>
       
       <div className="mb-8">
-        <p className="text-white text-lg leading-relaxed">
+        <p className="text-white text-md p-2 text-center leading-relaxed">
           Haben Sie Fragen oder benötigen Unterstützung bei der Nutzung unserer Anwendung? 
           Wir helfen Ihnen gerne weiter! Füllen Sie einfach das folgende Formular aus 
           und unser Support-Team wird sich so schnell wie möglich bei Ihnen melden.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6 bg-gray-800 p-6 rounded-lg">
+      <form onSubmit={handleSubmit} className="space-y-6 bg-gradient-to-br from-gray-900 to-gray-700 opacity-75 shadow-[0_0px_50px_10px_rgb(0,0,0,0.8)] p-6 rounded-lg border">
         <div>
           <label htmlFor="name" className="block text-white mb-2">Name</label>
           <input

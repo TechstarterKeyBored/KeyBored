@@ -3,7 +3,7 @@ import React from "react";
 function Datenschutz() {
   return (
     <div className="p-8 mx-auto w-4xl mt-5">
-      <h2 className="text-3xl font-bold mb-8 text-white">
+      <h2 className="text-3xl font-bold mb-8 text-amber-100">
         Datenschutzerklärung
       </h2>
       <p className="text-white">
