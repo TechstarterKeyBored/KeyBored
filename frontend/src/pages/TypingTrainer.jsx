@@ -17,13 +17,13 @@ function TypingTrainer() {
       <div className="flex flex-row gap-5">
         <button
           onClick={() => navigate("/TypingGame")}
-          className="w-96 text-white font-bold text-xl p-3 bg-gray-900 border-1 border-gray-400 rounded-2xl shadow-fuchsia-950 shadow-lg hover:scale-104 hover:shadow-xl transition-all mt-4"
+          className="w-96 text-white font-bold text-xl p-3 bg-gray-900 border-1 border-black rounded-2xl shadow-fuchsia-950 shadow-lg hover:scale-104 hover:shadow-xl transition-all mt-4"
         >
           TypingGame
         </button>
         <button
           onClick={() => navigate("/KaraokeTrainer")}
-          className="w-96 text-white font-bold text-xl p-3 bg-gray-900 border-1 border-gray-400 rounded-2xl shadow-fuchsia-950 shadow-lg hover:scale-104 hover:shadow-xl transition-all mt-4"
+          className="w-96 text-white font-bold text-xl p-3 bg-gray-900 border-1 border-black rounded-2xl shadow-fuchsia-950 shadow-lg hover:scale-104 hover:shadow-xl transition-all mt-4"
         >
           KaraokeGame
         </button>
