@@ -8,7 +8,7 @@ function TypingTrainer() {
 
   return (
     <div className="flex flex-col items-center gap-4 p-10 w-4xl mx-auto">
-      <h1 className="text-2xl font-bold text-amber-100 mt-10">Willkommen auf TypingTrainer</h1>
+      <h1 className="text-4xl font-semibold text-amber-100 mt-10">Willkommen im TypingTrainer</h1>
       <p className="text-white p-4 text-md text-center mt-2">
         Hier kannst du zwischen unseren 2 Modis auswählen. Wenn du neu bist in der Welt des
         10-Finger-Typings, dann empfehle ich dir, mit unserem TypingGame zu starten, 
