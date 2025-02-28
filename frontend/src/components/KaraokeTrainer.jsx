@@ -759,7 +759,7 @@ const KaraokeTrainer = () => {
           value={inputValue}
           onChange={handleInput}
           type="text"
-          className="bg-gray-600 text-white w-1/2 h-10 rounded-xl border-1 border-white"
+          className="bg-gray-600 text-white w-1/2 h-10 rounded-xl border-1 border-white p-3"
         />
       </div>
 
