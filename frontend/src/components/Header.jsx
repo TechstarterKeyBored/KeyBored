@@ -13,7 +13,7 @@ function Header() {
   };
 
   return (
-    <header className="text-white py-2 text-center shadow-2xl shadow-fuchsia-800 border-b-1 border-b-fuchsia-700">
+    <header className="text-white z-50 py-2 text-center shadow-2xl border-b-1 border-b-fuchsia-700">
       <nav className="flex flex-row justify-between items-center ml-2 px-5">
         <Link to="/" id="logo">
           <h1 className="text-4xl font-bold">KeyBored</h1>
