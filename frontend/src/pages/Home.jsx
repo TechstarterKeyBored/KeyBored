@@ -37,23 +37,23 @@ function VideoWithSlider() {
 
       <div className="grid grid-col-2">
         <div className="col-start-1">
-          <h1 className=" text-white text-4xl font-bold ml-20 mt-10">
+          <h1 className=" text-white text-4xl font-semibold ml-20 mt-10">
             UNSERE BENUTZTEN TOOLS
           </h1>
-          <div className="flex col-start-1 p-10 space-x-20 ml-10 w-[69vw]">
-            <img src="public/vite.svg" width="85px" />
-            <img src="public/react.svg" width="90px" />
-            <img src="public/tailwind.svg" width="200px" />
-            <img src="public/mongodb.svg" width="225px" />
+          <div className="flex col-start-1 p-10 space-x-10 ml-10 w-[69vw]">
+            <img src="public/tailwind.svg" width="14%" />
+            <img src="public/react.svg" width="7%" />
+            <img src="public/mongodb.svg" width="15%" />
+            <img src="public/vite.svg" width="6%" />
             <img src="public/ionos.svg" width="15%" />
           </div>
         </div>
-        <div className="col-start-2">
-          <h1 className="text-white text-right text-4xl px-20 font-bold mt-10 w-[29vw]">
+        <div className="col-start-2 mr-20">
+          <h1 className="text-white text-right text-4xl font-semibold mt-10 ">
             TEAM KEYBORED
           </h1>
-          <div className="relative right py-10 px-20 mt-5 text-right ">
-              <span className="text-white text-3xl font-semibold italic">Michelle, Nico, Marc, Vitali, Ömer</span>
+          <div className="relative right  mt-5 text-right ">
+              <span className="text-white text-2xl font-semibold italic">Michelle, Nico, Marc, Vitali, Ömer</span>
           </div>
         </div>
       </div>
