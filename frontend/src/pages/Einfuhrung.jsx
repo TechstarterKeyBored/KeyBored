@@ -11,7 +11,7 @@ function Einführung() {
         effektive Übungen, um deine Tippgeschwindigkeit zu steigern. Leg los und
         werde zum Tastatur-Profi!
       </p>
-      <div className="w-screen h-[65vh] overflow-hidden mb-7">
+      <div className="w-Full h-[65vh] overflow-hidden mb-7">
         <video
           className="w-[100vh] h-[60vh] mx-auto mt-10 object-cover rounded-xl"
           controls
