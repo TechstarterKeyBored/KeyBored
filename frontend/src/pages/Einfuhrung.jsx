@@ -16,7 +16,7 @@ function Einführung() {
           className="w-[100vh] h-[60vh] mx-auto mt-10 object-cover rounded-xl"
           controls
         >
-          <source src="/videos/Einführung.mp4" type="video/mp4" />
+          <source src="public/videos/Einführung.mp4" type="video/mp4" />
           Dein Browser unterstützt das Video-Tag nicht.
         </video>
       </div>

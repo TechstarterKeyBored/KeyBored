@@ -695,8 +695,8 @@ const KaraokeTrainer = () => {
   if (!selectedSong)
     return (
       <div className="w-1/2 mb-5 rounded-2xl border-1 border-black bg-gray-800 text-white mx-auto mt-10 shadow-[0_0px_50px_10px_rgb(0,0,0,0.8)] shadow-fuchsia-950">
-                <h2 className="text-amber-100 text-3xl font-semibold text-center mt-2">Karaoke Game</h2>
-        <div className="grid w-full grid-cols-2 gap-4 p-3 mb-3"> 
+                <h2 className="text-amber-100 text-4xl font-semibold text-center mt-4 mb-2">Karaoke Game</h2>
+        <div className="grid w-full grid-cols-2 gap-4 p-5 mb-3"> 
         {songs.map((song) => (
           <button
             key={song.title}
