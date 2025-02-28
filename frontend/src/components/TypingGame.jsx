@@ -4,10 +4,10 @@ import React, { useState, useEffect, useRef } from "react";
 const fingerZones = [
   { letters: "aqy", color: "#FADA7A", position: 0, label: "Kleiner Finger" },
   { letters: "wsx", color: "#A6F1E0", position: 1, label: "Ringfinger" },
-  { letters: "edc", color: "#B2A5FF", position: 2, label: "Mittelfinger" },
+  { letters: "edc", color: "#87A2FF", position: 2, label: "Mittelfinger" },
   { letters: "rfvtgb", color: "#DE3163", position: 3, label: "Zeigefinger" },
   { letters: "zhnujm", color: "#DE3163", position: 4, label: "Zeigefinger" },
-  { letters: "ik", color: "#B2A5FF", position: 5, label: "Mittelfinger" },
+  { letters: "ik", color: "#87A2FF", position: 5, label: "Mittelfinger" },
   { letters: "ol", color: "#A6F1E0", position: 6, label: "Ringfinger" },
   { letters: "pöüä", color: "#FADA7A", position: 7, label: "Kleiner Finger" },
 ];
@@ -146,7 +146,7 @@ const TypingGame = () => {
   };
 
   return (
-    <div className="relative w-[70%] h-[83vh] flex-col items-center justify-center mx-auto bg-gray-800  opacity-75 shadow-2xl">
+    <div className="relative z-40 w-[70%] h-[78vh] mt-5 p-2 rounded-lg items-center justify-center mx-auto bg-gradient-to-br from-gray-900 to-gray-700 opacity-75 shadow-[0_0px_50px_10px_rgb(0,0,0,0.8)] border">
       {gameStarted ? (
         countdown > 0 ? (
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white p-6 rounded-lg text-center">
@@ -162,20 +162,20 @@ const TypingGame = () => {
           </div>
         ) : (
           <>
-            <div className="absolute top-4 left-4 font-bold text-white text-xl">
+            <div className="absolute z-50 top-2 rounded-lg right-4 font-bold bg-gray-700 p-2 text-white text-xl">
               Score: {score} | Highscore: {highScore} | Leben: {lives}
             </div>
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4 z-999">
-              <button onClick={handlePause} className="bg-blue-500 text-white py-2 px-4 rounded">
+            <div className="absolute top-4 left-30 transform -translate-x-1/2 flex gap-4 z-999">
+              <button onClick={handlePause} className="bg-[#37a0fd] text-white py-2 px-4 rounded">
                 {isPaused ? "Weiter" : "Pause"}
               </button>
-              <button onClick={handleRestart} className="bg-red-500 text-white py-2 px-4 rounded">Neustart</button>
+              <button onClick={handleRestart} className="bg-[#ff133a] text-white py-2 px-4 rounded">Neustart</button>
             </div>
             <div ref={gameAreaRef} className="grid grid-cols-8 w-full h-[70%] border-white relative">
               {fallingLetters.map((item) => (
                 <div
                   key={item.id}
-                  className="absolute text-2xl font-bold"
+                  className="absolute text-3xl font-semibold [text-shadow:_0_5px_4px_rgb(99_102_241_/_0.5)]"
                   style={{
                     top: `${item.top}px`,
                     left: `calc(${item.zoneIndex * 12.5}% + 6.25%)`,
@@ -186,12 +186,12 @@ const TypingGame = () => {
                 </div>
               ))}
             </div>
-            <div className="grid grid-cols-8 w-full h-20 mt-4 border-t-2 border-s-violet-200 border-white">
+            <div className="grid grid-cols-8 gap-0.5 w-full h-20 mt-15 shadow-[0px_0px_10px_0px_rgba(0,_0,_0,_0.8)]">
               {fingerZones.map((zone) => (
                 <div
                   key={zone.position}
-                  className="flex flex-col items-center justify-center text-black font-bold"
-                  style={{ backgroundColor: zone.color, borderRadius:"12px", filter: activeZones.includes(zone.position) ? "brightness(1.5)" : "brightness(1)"}}
+                  className="flex flex-col items-center justify-center text-black font-semibold devide-dashed border border-dotted"
+                  style={{ backgroundColor: zone.color, borderRadius:"6px", filter: activeZones.includes(zone.position) ? "brightness(1.5)" : "brightness(1)"}}
                 >
                   {zone.label}
                 </div>
