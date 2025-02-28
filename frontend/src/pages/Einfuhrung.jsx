@@ -13,7 +13,7 @@ function Einführung() {
       </p>
       <div className="w-screen h-[65vh] overflow-hidden">
         <video
-          className="w-[100vh] h-[60vh] mx-auto mt-10 object-cover rounded-xl"
+          className="w-[100vh] h-[60vh] mx-auto mt-10 object-cover rounded-xl mb-7"
           controls
         >
           <source src="/videos/Einführung.mp4" type="video/mp4" />
