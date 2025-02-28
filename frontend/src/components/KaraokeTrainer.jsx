@@ -715,7 +715,7 @@ const KaraokeTrainer = () => {
 
   return (
     <div className="w-1/2 mx-auto">
-    <div className="bg-gray-800 rounded-2xl mt-25 p-5">
+    <div className="bg-gray-800 rounded-2xl mt-25 p-5 shadow-[0_0px_50px_10px_rgb(0,0,0,0.7)] border border-black">
       {/* Audio player */}
       <audio
         ref={audioRef}
