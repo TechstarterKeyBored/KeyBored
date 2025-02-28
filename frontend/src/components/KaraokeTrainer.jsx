@@ -694,14 +694,14 @@ const KaraokeTrainer = () => {
   /* Song-Auswahl */
   if (!selectedSong)
     return (
-      <div className="w-1/2 m-2 rounded-2xl border-1 border-black bg-gray-800 text-white mx-auto mt-5 shadow-[0_0px_50px_10px_rgb(0,0,0,0.8)] shadow-fuchsia-950">
-                <h2 className="text-amber-100 text-3xl font-semibold text-center mt-4">Karaoke Game</h2>
-        <div className="grid w-full grid-cols-2 gap-4 p-3"> 
+      <div className="w-1/2 mb-5 rounded-2xl border-1 border-black bg-gray-800 text-white mx-auto mt-10 shadow-[0_0px_50px_10px_rgb(0,0,0,0.8)] shadow-fuchsia-950">
+                <h2 className="text-amber-100 text-3xl font-semibold text-center mt-2">Karaoke Game</h2>
+        <div className="grid w-full grid-cols-2 gap-4 p-3 mb-3"> 
         {songs.map((song) => (
           <button
             key={song.title}
             onClick={() => setSelectedSong(song)}
-            className="flex flex-col justify-center p-3 bg-gray-900 border-1 border-black rounded-2xl shadow-fuchsia-900 shadow-lg hover:scale-104 hover:shadow-xl transition-all mt-4"
+            className="flex flex-col justify-center p-3 bg-gray-900 border-1 border-black rounded-2xl shadow-fuchsia-900 shadow-lg hover:scale-104 hover:shadow-xl transition-all mb-2"
           >
             {song.title}
             <div className="flex justify-center m-1">
