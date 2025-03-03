@@ -64,7 +64,7 @@ function HelpSupport() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
+            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-fuchsia-500 focus:outline-none"
             required
           />
         </div>
@@ -77,7 +77,7 @@ function HelpSupport() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
+            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-fuchsia-500 focus:outline-none"
             required
           />
         </div>
@@ -90,7 +90,7 @@ function HelpSupport() {
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
+            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-fuchsia-500 focus:outline-none"
             required
           />
         </div>
@@ -103,7 +103,7 @@ function HelpSupport() {
             value={formData.message}
             onChange={handleChange}
             rows="5"
-            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
+            className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-fuchsia-500 focus:outline-none"
             required
           ></textarea>
         </div>

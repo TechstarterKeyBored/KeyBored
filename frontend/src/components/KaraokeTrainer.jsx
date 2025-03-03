@@ -694,14 +694,14 @@ const KaraokeTrainer = () => {
   /* Song-Auswahl */
   if (!selectedSong)
     return (
-      <div className="w-1/2 mb-5 rounded-2xl border-1 border-black bg-gray-800 text-white mx-auto mt-10 shadow-[0_0px_50px_10px_rgb(0,0,0,0.8)] shadow-fuchsia-950">
+      <div className="w-1/2 mb-5 rounded-lg border-1 border-black bg-gradient-to-br from-gray-900 to-gray-700 opacity-75 text-white mx-auto mt-10 shadow-[0_0px_50px_10px_rgb(0,0,0,0.8)] shadow-fuchsia-950">
                 <h2 className="text-amber-100 text-4xl font-semibold text-center mt-4 mb-2">Karaoke Game</h2>
         <div className="grid w-full grid-cols-2 gap-4 p-5 mb-3"> 
         {songs.map((song) => (
           <button
             key={song.title}
             onClick={() => setSelectedSong(song)}
-            className="flex flex-col justify-center p-3 bg-gray-900 border-1 border-black rounded-2xl shadow-fuchsia-900 shadow-lg hover:scale-104 hover:shadow-xl transition-all mb-2"
+            className="flex flex-col justify-center p-3 bg-gradient-to-br from-black to-gray-900 border-1 border-black rounded-2xl shadow-fuchsia-900 shadow-md hover:scale-104 hover:shadow-lg transition-all mb-2"
           >
             {song.title}
             <div className="flex justify-center m-1">
@@ -714,8 +714,8 @@ const KaraokeTrainer = () => {
     );
 
   return (
-    <div className="w-1/2 mx-auto">
-    <div className="bg-gray-800 rounded-2xl mt-25 p-5 shadow-[0_0px_50px_10px_rgb(0,0,0,0.7)] border border-black">
+    <div className="w-1/2 h-1/2 mx-auto">
+    <div className="bg-gradient-to-br from-gray-900 to-gray-700 opacity-75 rounded-lg mt-25 p-5 shadow-[0_0px_50px_10px_rgb(0,0,0,0.8)] border border-black">
       {/* Audio player */}
       <audio
         ref={audioRef}
@@ -759,7 +759,7 @@ const KaraokeTrainer = () => {
           value={inputValue}
           onChange={handleInput}
           type="text"
-          className="bg-gray-600 text-white w-1/2 h-10 rounded-xl border-1 border-white p-3"
+          className="bg-gray-700 border-gray-600 text-white w-1/2 h-10 rounded focus:border-fuchsia-500 focus:outline-none border-1 p-3"
         />
       </div>
 
@@ -769,7 +769,7 @@ const KaraokeTrainer = () => {
         <div className="w-full">
           <button
             onClick={() => { setSelectedSong(""), handleReset() }}
-            className="flex justify-self-center m-2 p-2 bg-gray-900  text-white rounded-xl border-1 hover:bg-gray-600 transition-colors"
+            className="flex justify-self-center m-2 p-2 bg-gray-900  text-white rounded hover:bg-gray-600 transition-colors"
           >zur Songauswahl</button>
       </div>
       </div>
