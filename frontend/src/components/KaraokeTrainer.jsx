@@ -735,7 +735,7 @@ const KaraokeTrainer = () => {
       <div className="flex justify-center space-x-4">
         <button
           onClick={handlePlay}
-          className="p-3 bg-fuchsia-600 rounded-full hover:bg-fuchsia-700 transition-colors"
+          className="p-3 bg-fuchsia-700 rounded-full hover:bg-fuchsia-500 transition-colors"
         >
           <Play className="w-6 h-6 text-white" />
         </button>

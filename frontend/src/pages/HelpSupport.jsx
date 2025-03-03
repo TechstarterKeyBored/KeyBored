@@ -110,7 +110,7 @@ function HelpSupport() {
 
         <button
           type="submit"
-          className="bg-fuchsia-600 text-white px-6 py-2 rounded hover:bg-fuchsia-700 transition-colors"
+          className="bg-fuchsia-700 text-white px-6 py-2 rounded hover:bg-fuchsia-600 transition-colors"
         >
           Absenden
         </button>
