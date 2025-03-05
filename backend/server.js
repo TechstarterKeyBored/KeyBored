@@ -1,16 +1,19 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const mongoURI = process.env.MONGODB_URI;
-mongoose.connect(mongoURI)
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => console.log('MongoDB verbunden'))
   .catch(err => console.error('Fehler bei der Verbindung zu MongoDB:', err));
 
@@ -46,7 +49,7 @@ app.post('/api/login', async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign({ userId: user._id }, process.env.jwttoken, { expiresIn: '1h' });
+      const token = jwt.sign({ userId: user._id }, process.env.JWTTOKEN, { expiresIn: '1h' });
       res.status(200).json({ success: true, token });
     } else {
       res.status(401).json({ success: false, message: 'Ungültige Anmeldedaten' });
@@ -63,7 +66,7 @@ const authenticateToken = (req, res, next) => {
     return res.status(401).json({ success: false, message: 'Zugriff verweigert' });
   }
 
-  jwt.verify(token, process.env.jwttoken, (err, user) => {
+  jwt.verify(token, process.env.JWTTOKEN, (err, user) => {
     if (err) {
       return res.status(403).json({ success: false, message: 'Ungültiges Token' });
     }
@@ -83,12 +86,12 @@ app.post('/api/refresh-token', (req, res) => {
     return res.status(401).json({ success: false, message: 'Refresh-Token fehlt' });
   }
 
-  jwt.verify(refreshToken, process.env.jwttoken, (err, user) => {
+  jwt.verify(refreshToken, process.env.JWTTOKEN, (err, user) => {
     if (err) {
       return res.status(403).json({ success: false, message: 'Ungültiges Refresh-Token' });
     }
 
-    const newToken = jwt.sign({ userId: user.userId }, process.env.jwttoken, { expiresIn: '1h' });
+    const newToken = jwt.sign({ userId: user.userId }, process.env.JWTTOKEN, { expiresIn: '1h' });
     res.json({ success: true, token: newToken });
   });
 });
