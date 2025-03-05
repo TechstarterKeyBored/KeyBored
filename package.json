@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.2.0",
+    "vitest": "^3.0.7"
+  },
+  "scripts": {
+    "test": "vitest",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "husky": "^9.1.7"
+  }
+}
