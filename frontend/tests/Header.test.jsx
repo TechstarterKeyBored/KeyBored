@@ -1,21 +1,24 @@
-import { test, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+// Test file for Header component
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import Header from '../src/components/Header';
 
-test("Header renders correctly", () => {
-  render(<header />);
-  const Header = screen.getByRole("banner");
-  expect(Header).toBeInTheDocument();
-});
+describe('Header Component', () => {
+  it("h1 element contains the text 'KeyBored'", () => {
+    render(<Header />);
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading).toHaveTextContent('KeyBored');
+  });
 
-test("h1 element contains the text 'KeyBored'", () => {
-  render(<h1>KeyBored</h1>);
-  const headingText = screen.getByText("KeyBored");
-  expect(headingText).toBeInTheDocument();
-});
+  it('Header contains a navigation element', () => {
+    render(<Header />);
+    const nav = screen.getByRole('navigation');
+    expect(nav).toBeInTheDocument();
+  });
 
-test("Header contains a navigation element", () => {
-  render(<nav />);
-  const navigation = screen.getByRole("navigation");
-  expect(navigation).toBeInTheDocument();
+  it('Header is visible', () => {
+    render(<Header />);
+    const header = screen.getByRole('banner');
+    expect(header).toBeVisible();
+  });
 });
