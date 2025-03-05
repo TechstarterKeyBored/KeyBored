@@ -1,0 +1,24 @@
+{
+  "name": "keybored",
+  "version": "1.0.0",
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TechstarterKeyBored/KeyBored.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TechstarterKeyBored/KeyBored/issues"
+  },
+  "homepage": "https://github.com/TechstarterKeyBored/KeyBored#readme",
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
