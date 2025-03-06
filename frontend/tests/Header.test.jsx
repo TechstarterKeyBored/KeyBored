@@ -16,6 +16,14 @@ const TestWrapper = ({ children }) => (
   </BrowserRouter>
 );
 
+const TestWrapper1 = ({ children }) => (
+  <BrowserRouter>
+    <AuthContext.Provider value={{ isLoggedIn: true, setIsLoggedIn: () => {} }}>
+      {children}
+    </AuthContext.Provider>
+  </BrowserRouter>
+);
+
 
 describe('Header Component', () => {
   it("h1 element contains the text 'KeyBored'", () => {
@@ -48,32 +56,12 @@ describe('Header Component', () => {
     expect(screen.getByText(/Anmelden/i)).toBeInTheDocument();
   });
   
-  // it('shows Typing Trainer and logout button when logged in', () => {
-  //   renderHeader(true);
-  //   screen.debug();
-  //   render(<Header />, { wrapper: ({ children }) => <TestWrapper isLoggedIn={true}>{children}</TestWrapper> });
-  //   expect(screen.getByText('Typing Trainer')).toBeInTheDocument();
-  //   expect(screen.getByText('Abmelden')).toBeInTheDocument();
-  // });
-});
-
-describe('Header Component', () => {
-  const renderHeader = (isLoggedIn) => {
-    render(
-      <BrowserRouter>
-        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn: () => {} }}>
-          <Header />
-        </AuthContext.Provider>
-      </BrowserRouter>
-    );
-  };
-
-  it('shows Typing Trainer and logout button when logged in', () => {
-    renderHeader(true);
-    screen.debug(); 
+  it('shows login and register links when not logged in', () => {
+    render(<Header />, { wrapper: ({ children }) => <TestWrapper1 isLoggedIn={true}>{children}</TestWrapper1> });
     expect(screen.getByText(/Typing Trainer/i)).toBeInTheDocument();
     expect(screen.getByText(/Abmelden/i)).toBeInTheDocument();
   });
+
 });
 
 describe('Footer Component', () => {
