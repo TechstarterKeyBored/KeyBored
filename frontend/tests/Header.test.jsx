@@ -62,6 +62,25 @@ describe('Header Component', () => {
     expect(screen.getByText(/Abmelden/i)).toBeInTheDocument();
   });
 
+  it('has correct link destinations when not logged in', () => {
+    render(<Header />, { wrapper: TestWrapper });
+    expect(screen.getByText(/Registrieren/i).closest('a')).toHaveAttribute('href', '/register');
+    expect(screen.getByText(/Anmelden/i).closest('a')).toHaveAttribute('href', '/login');
+  });
+
+  it('has correct link destination for Typing Trainer when logged in', () => {
+    render(<Header />, { wrapper: TestWrapper1 });
+    expect(screen.getByText(/Typing Trainer/i).closest('a')).toHaveAttribute('href', '/typing-trainer');
+  });
+
+  it('header has the correct styling', () => {
+    render(<Header />, { wrapper: TestWrapper });
+    const header = screen.getByRole('banner');
+    expect(header).toHaveClass('text-white');
+    expect(header).toHaveClass('z-50');
+    expect(header).toHaveClass('py-2');
+  });
+
 });
 
 describe('Footer Component', () => {
@@ -71,4 +90,3 @@ describe('Footer Component', () => {
     expect(appElement).toHaveClass('text-white');
   });
 });
-
