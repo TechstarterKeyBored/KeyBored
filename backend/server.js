@@ -49,7 +49,7 @@ app.post('/api/login', async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign({ userId: user._id }, process.env.JWTTOKEN, { expiresIn: '1h' });
+      const token = jwt.sign({ userId: user._id }, process.env.JWTSECRET, { expiresIn: '1h' });
       res.status(200).json({ success: true, token });
     } else {
       res.status(401).json({ success: false, message: 'Ungültige Anmeldedaten' });
@@ -66,7 +66,7 @@ const authenticateToken = (req, res, next) => {
     return res.status(401).json({ success: false, message: 'Zugriff verweigert' });
   }
 
-  jwt.verify(token, process.env.JWTTOKEN, (err, user) => {
+  jwt.verify(token, process.env.JWTSECRET, (err, user) => {
     if (err) {
       return res.status(403).json({ success: false, message: 'Ungültiges Token' });
     }
@@ -86,12 +86,12 @@ app.post('/api/refresh-token', (req, res) => {
     return res.status(401).json({ success: false, message: 'Refresh-Token fehlt' });
   }
 
-  jwt.verify(refreshToken, process.env.JWTTOKEN, (err, user) => {
+  jwt.verify(refreshToken, process.env.JWTSECRET, (err, user) => {
     if (err) {
       return res.status(403).json({ success: false, message: 'Ungültiges Refresh-Token' });
     }
 
-    const newToken = jwt.sign({ userId: user.userId }, process.env.JWTTOKEN, { expiresIn: '1h' });
+    const newToken = jwt.sign({ userId: user.userId }, process.env.JWTSECRET, { expiresIn: '1h' });
     res.json({ success: true, token: newToken });
   });
 });
