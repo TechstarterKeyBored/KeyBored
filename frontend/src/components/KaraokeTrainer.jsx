@@ -768,7 +768,7 @@ const KaraokeTrainer = () => {
         {/* back button */}
         <div className="w-full">
           <button
-            onClick={() => { setSelectedSong(""), handleReset() }}
+            onClick={() => { setSelectedSong(""); handleReset() }}
             className="flex justify-self-center m-2 p-2 bg-gray-900  text-white rounded hover:bg-gray-600 transition-colors"
           >zur Songauswahl</button>
       </div>
